@@ -27,5 +27,6 @@ const fechaHoraFormateada = `${año}-${mes < 10 ? '0' : ''}${mes}-${dia < 10 ? '
 
 console.log("Fecha y hora actual:", fechaHoraFormateada);
 console.log(`Estas en la ruta ${req.url}`)
+console.log(`Con el metodo ${req.method}`)
 next()
 }

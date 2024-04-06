@@ -29,6 +29,7 @@ function loggerGlobal(req, res, next) {
     const fechaHoraFormateada = `${año}-${mes < 10 ? '0' : ''}${mes}-${dia < 10 ? '0' : ''}${dia} ${hora < 10 ? '0' : ''}${hora}:${minutos < 10 ? '0' : ''}${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
     console.log("Fecha y hora actual:", fechaHoraFormateada);
     console.log(`Estas en la ruta ${req.url}`);
+    console.log(`Con el metodo ${req.method}`);
     next();
 }
 exports.loggerGlobal = loggerGlobal;
