@@ -14,7 +14,8 @@ import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
-    //! generar un modulo de configuracion y tiene que estar disponible de forma global dentro de app module
+    
+      //! generar un modulo de configuracion y tiene que estar disponible de forma global dentro de app module
 
      ConfigModule.forRoot({
       //? utiliza como fuente  typeorm el archivo (donde se definen las propiedades de acceso a la bd)

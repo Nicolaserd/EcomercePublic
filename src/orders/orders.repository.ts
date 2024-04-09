@@ -73,4 +73,22 @@ export class OrdersRepository {
         })
 
     }
+
+    async getOrder(id:string){
+        const order = this.ordersRepository.findOne({
+            where:{id},
+            relations:{
+                orderDetails:{
+                    products:true,
+                },
+            },
+        })
+        
+        if(!order){
+            return "order not found"
+
+        }
+
+        return order;
+    }
 }

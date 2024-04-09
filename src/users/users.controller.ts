@@ -6,12 +6,12 @@ import { AuthGuard } from 'src/auth/guards/auth.guard';
 export class UsersController {
     constructor(private readonly userService:UsersService){}
    
-//    @Get()
-//    @UseGuards(AuthGuard)
-//    getUsers(@Query('page') page: number = 1, @Query('limit') limit: number = 5) {
-    
-//     return this.userService.getUsers(page, limit);
-//   }
+    @Get()
+    @UseGuards(AuthGuard)
+    getUsers(@Query('page') page: number = 1, @Query('limit') limit: number = 5) {
+        
+        return this.userService.getUsers(page, limit);
+    }
     @Get(":id")
 
     getUser(@Param("id") id:string){
@@ -21,17 +21,23 @@ export class UsersController {
     addUser(@Body() user:any){
         return this.userService.addUser(user)
     }
-    // @Put(":id")
-    // @UseGuards(AuthGuard)
-    // updateUser(@Param("id") id:string,@Body() user:any){
-    //     return this.userService.updateUser(id,user)
-    // }
-    // @Delete(":id")
-    // @UseGuards(AuthGuard)
-    // deleteUser(@Param("id") id:string){
-    //     return  this.userService.deleteUser(id)
-    // }
-//!Lo mismo para productos
+    @Put(":id")
+    @UseGuards(AuthGuard)
+    updateUser(@Param("id") id:string,@Body() user:any){
+        return this.userService.updateUser(id,user)
+    }
+    @Delete(":id")
+    @UseGuards(AuthGuard)
+    deleteUser(@Param("id") id:string){
+        return  this.userService.deleteUser(id)
+    }
+    @Get(":email")
+    @UseGuards(AuthGuard)
+    getUserByEmail(@Param("email") email:string){
+        return  this.userService.getUserByEmail(email)
+    }
+
+    //!Lo mismo para productos
 
     
 }

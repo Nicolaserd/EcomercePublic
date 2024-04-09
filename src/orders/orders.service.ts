@@ -8,4 +8,8 @@ export class OrdersService {
     addOrder(userId:string,products:any){
         return this.ordersRepository.addOrder(userId,products);
     }
+
+    getOrder(id:string){
+        return this.ordersRepository.getOrder(id);
+    }
 }
