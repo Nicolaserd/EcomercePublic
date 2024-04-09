@@ -1,44 +1,31 @@
-type User = {
-    id: string;
-    email: string;
-    name: string;
-    password: string;
-    address: string;
-    phone: string;
-    country?: string | undefined;
-    city?: string | undefined;
-};
+import { Orders } from "src/entities/orders.entity";
+import { Users } from "src/entities/users.entity";
+import { Repository } from "typeorm";
 export declare class UserRepository {
-    private users;
-    getUsers(page: number, limit: number): {
+    private usersRepository;
+    constructor(usersRepository: Repository<Users>);
+    getUsers(page: number, limit: number): Promise<Partial<Users>[]>;
+    getUser(id: string): Promise<"user not found" | {
         id: string;
-        email: string;
         name: string;
+        email: string;
+        phone: number;
+        country: string;
         address: string;
-        phone: string;
-        country?: string;
-        city?: string;
-    }[];
-    getById(id: string): {
+        city: string;
+        orders: Orders[];
+    }>;
+    addUser(user: Users): Promise<Partial<Users>>;
+    updateUser(id: string, user: Users): Promise<{
         id: string;
-        email: string;
         name: string;
-        address: string;
-        phone: string;
-        country?: string;
-        city?: string;
-    };
-    addUser(user: User): {
-        id: string;
         email: string;
-        name: string;
+        phone: number;
+        country: string;
         address: string;
-        phone: string;
-        country?: string;
-        city?: string;
-    };
-    updateUser(id: string, user: User): string;
-    deleteUser(id: string): string;
-    getUsersByEmail(email: string): User;
+        city: string;
+        orders: Orders[];
+    }>;
+    deleteUser(id: string): Promise<Partial<Users>>;
+    getUserByEmail(email: string): Promise<Users>;
 }
-export {};

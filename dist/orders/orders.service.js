@@ -9,25 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthService = void 0;
+exports.OrdersService = void 0;
 const common_1 = require("@nestjs/common");
-const users_repository_1 = require("../users/users.repository");
-let AuthService = class AuthService {
-    constructor(userRepository) {
-        this.userRepository = userRepository;
+const orders_repository_1 = require("./orders.repository");
+let OrdersService = class OrdersService {
+    constructor(ordersRepository) {
+        this.ordersRepository = ordersRepository;
     }
-    getAuth() {
-        return "Todos las Auth";
+    addOrder(userId, products) {
+        return this.ordersRepository.addOrder(userId, products);
     }
-    signIn(email, password) {
-        if (!email || !password) {
-            return "email and password required";
-        }
+    getOrder(id) {
+        return this.ordersRepository.getOrder(id);
     }
 };
-exports.AuthService = AuthService;
-exports.AuthService = AuthService = __decorate([
+exports.OrdersService = OrdersService;
+exports.OrdersService = OrdersService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [users_repository_1.UserRepository])
-], AuthService);
-//# sourceMappingURL=auth.service.js.map
+    __metadata("design:paramtypes", [orders_repository_1.OrdersRepository])
+], OrdersService);
+//# sourceMappingURL=orders.service.js.map

@@ -20,7 +20,7 @@ let UsersService = class UsersService {
         return this.usersRepository.getUsers(page, limit);
     }
     getUser(id) {
-        return this.usersRepository.getById(id);
+        return this.usersRepository.getUser(id);
     }
     addUser(user) {
         return this.usersRepository.addUser(user);
@@ -30,6 +30,9 @@ let UsersService = class UsersService {
     }
     deleteUser(id) {
         return this.usersRepository.deleteUser(id);
+    }
+    getUserByEmail(email) {
+        return this.usersRepository.getUserByEmail(email);
     }
 };
 exports.UsersService = UsersService;

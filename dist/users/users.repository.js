@@ -5,152 +5,67 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserRepository = void 0;
 const common_1 = require("@nestjs/common");
+const typeorm_1 = require("@nestjs/typeorm");
+const users_entity_1 = require("../entities/users.entity");
+const typeorm_2 = require("typeorm");
 let UserRepository = class UserRepository {
-    constructor() {
-        this.users = [{
-                id: "1",
-                email: "usuario1@example.com",
-                name: "Usuario 1",
-                password: "contraseña1",
-                address: "123 Calle Principal",
-                phone: "123456789",
-                country: "País 1",
-                city: "Ciudad 1"
-            },
-            {
-                id: "2",
-                email: "usuario2@example.com",
-                name: "Usuario 2",
-                password: "contraseña2",
-                address: "456 Calle Secundaria",
-                phone: "987654321",
-                country: "País 2",
-                city: "Ciudad 2"
-            },
-            {
-                id: "3",
-                email: "usuario3@example.com",
-                name: "Usuario 3",
-                password: "contraseña3",
-                address: "789 Calle Terciaria",
-                phone: "123123123",
-                country: "País 3",
-                city: "Ciudad 3"
-            },
-            {
-                id: "4",
-                email: "usuario4@example.com",
-                name: "Usuario 4",
-                password: "contraseña4",
-                address: "321 Calle Cuaternaria",
-                phone: "456456456",
-                country: "País 4",
-                city: "Ciudad 4"
-            },
-            {
-                id: "5",
-                email: "usuario5@example.com",
-                name: "Usuario 5",
-                password: "contraseña5",
-                address: "987 Calle Quinaria",
-                phone: "789789789",
-                country: "País 5",
-                city: "Ciudad 5"
-            },
-            {
-                id: "6",
-                email: "usuario6@example.com",
-                name: "Usuario 6",
-                password: "contraseña6",
-                address: "654 Calle Senaria",
-                phone: "321321321",
-                country: "País 6",
-                city: "Ciudad 6"
-            },
-            {
-                id: "7",
-                email: "usuario7@example.com",
-                name: "Usuario 7",
-                password: "contraseña7",
-                address: "234 Calle Septenaria",
-                phone: "654654654",
-                country: "País 7",
-                city: "Ciudad 7"
-            },
-            {
-                id: "8",
-                email: "usuario8@example.com",
-                name: "Usuario 8",
-                password: "contraseña8",
-                address: "543 Calle Octonaria",
-                phone: "987987987",
-                country: "País 8",
-                city: "Ciudad 8"
-            },
-            {
-                id: "9",
-                email: "usuario9@example.com",
-                name: "Usuario 9",
-                password: "contraseña9",
-                address: "765 Calle Novenaria",
-                phone: "789123789",
-                country: "País 9",
-                city: "Ciudad 9"
-            },
-            {
-                id: "10",
-                email: "usuario10@example.com",
-                name: "Usuario 10",
-                password: "contraseña10",
-                address: "876 Calle Decenaria",
-                phone: "456789123",
-                country: "País 10",
-                city: "Ciudad 10"
-            }];
+    constructor(usersRepository) {
+        this.usersRepository = usersRepository;
     }
-    getUsers(page, limit) {
+    async getUsers(page, limit) {
+        let users = await this.usersRepository.find();
         const start = (page - 1) * limit;
-        const end = start + limit;
-        const users = this.users.slice(start, end);
+        const end = start + +limit;
+        users = users.slice(start, end);
         return users.map(({ password, ...user }) => user);
     }
-    getById(id) {
-        const user = this.users.find((user) => user.id === id);
-        const { password, ...userWhitoutPassword } = user;
-        return userWhitoutPassword;
-    }
-    addUser(user) {
-        const id = this.users.length + 1;
-        user.id = id.toString();
-        this.users.push(user);
-        const { password, ...userWhitoutPassword } = user;
-        return userWhitoutPassword;
-    }
-    updateUser(id, user) {
-        const oldUser = this.users.find((user) => user.id === id);
-        if (!oldUser) {
-            return "No se encontro usuario :c";
+    async getUser(id) {
+        const user = await this.usersRepository.findOne({
+            where: { id },
+            relations: {
+                orders: true,
+            }
+        });
+        if (!user) {
+            return "user not found";
         }
-        const updatedUser = { ...oldUser, ...user };
-        const index = this.users.findIndex((user) => user.id === id);
-        this.users[index] = updatedUser;
-        return updatedUser.id;
+        const { password, ...userWithoutPassword } = user;
+        return userWithoutPassword;
     }
-    deleteUser(id) {
-        const index = this.users.findIndex((user) => user.id === id);
-        const user = this.users[index];
-        this.users.splice(index, 1);
-        return user.id;
+    async addUser(user) {
+        const newUser = await this.usersRepository.save(user);
+        const { password, ...userWhitoutPassword } = newUser;
+        return userWhitoutPassword;
     }
-    getUsersByEmail(email) {
-        return this.users.find((user) => user.email === email);
+    async updateUser(id, user) {
+        await this.usersRepository.update(id, user);
+        const updateUser = await this.usersRepository.findOneBy({ id });
+        const { password, ...userWithoutPassword } = updateUser;
+        return userWithoutPassword;
+    }
+    async deleteUser(id) {
+        const user = await this.usersRepository.findOneBy({ id });
+        this.usersRepository.remove(user);
+        const { password, ...userWithoutPassword } = user;
+        return userWithoutPassword;
+    }
+    async getUserByEmail(email) {
+        return await this.usersRepository.findOneBy({ email });
     }
 };
 exports.UserRepository = UserRepository;
 exports.UserRepository = UserRepository = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __param(0, (0, typeorm_1.InjectRepository)(users_entity_1.Users)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], UserRepository);
 //# sourceMappingURL=users.repository.js.map

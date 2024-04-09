@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { CreateUserDto } from './users.dto';
 
 @Controller('users')
 export class UsersController {
@@ -14,21 +15,21 @@ export class UsersController {
     }
     @Get(":id")
 
-    getUser(@Param("id") id:string){
+    getUser(@Param("id",ParseUUIDPipe) id:string){
         return this.userService.getUser(id)
     }
     @Post()
-    addUser(@Body() user:any){
+    addUser(@Body() user:CreateUserDto){
         return this.userService.addUser(user)
     }
     @Put(":id")
     @UseGuards(AuthGuard)
-    updateUser(@Param("id") id:string,@Body() user:any){
+    updateUser(@Param("id",ParseUUIDPipe) id:string,@Body() user:any){
         return this.userService.updateUser(id,user)
     }
     @Delete(":id")
     @UseGuards(AuthGuard)
-    deleteUser(@Param("id") id:string){
+    deleteUser(@Param("id",ParseUUIDPipe) id:string){
         return  this.userService.deleteUser(id)
     }
     @Get(":email")
