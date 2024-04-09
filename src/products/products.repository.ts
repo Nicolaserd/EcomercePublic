@@ -1,58 +1,67 @@
 import { Injectable } from "@nestjs/common";
-type Product = {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    stock: boolean;
-    imgUrl: string;
-};
+import { InjectRepository } from "@nestjs/typeorm";
+import { Categories } from "src/entities/categories.entity";
+import { Products } from "src/entities/products.entity";
+import { Repository } from "typeorm";
+import * as data from "../data.json"
+
+
 
 @Injectable()
 export class ProductRepository{
-  private products : Product[]=[ 
-    {
-        id: 1,
-        name: "Laptop Dell Inspiron 15",
-        description: "Laptop de 15 pulgadas con procesador Intel Core i5, 8 GB de RAM y 512 GB de almacenamiento SSD.",
-        price: 899.99,
-        stock: true,
-        imgUrl: "https://example.com/laptop_dell_inspiron_15.jpg"
-    },
-    {
-        id: 2,
-        name: "Smartphone Samsung Galaxy S21",
-        description: "Smartphone Android de gama alta con pantalla AMOLED de 6.2 pulgadas, procesador Exynos 2100 y cámara principal de 108 MP.",
-        price: 999.99,
-        stock: true,
-        imgUrl: "https://example.com/samsung_galaxy_s21.jpg"
-    },
-    {
-        id: 3,
-        name: "Tablet Apple iPad Air",
-        description: "Tablet de 10.9 pulgadas con chip A14 Bionic, compatible con Apple Pencil y teclado Magic Keyboard.",
-        price: 599.99,
-        stock: false,
-        imgUrl: "https://example.com/apple_ipad_air.jpg"
-    },
-    {
-        id: 4,
-        name: "Monitor LG UltraWide 34\"",
-        description: "Monitor UltraWide de 34 pulgadas con resolución QHD, tecnología IPS y frecuencia de actualización de 144 Hz.",
-        price: 799.99,
-        stock: true,
-        imgUrl: "https://example.com/lg_ultrawide_monitor.jpg"
-    },
-    {
-        id: 5,
-        name: "Cámara Canon EOS R5",
-        description: "Cámara mirrorless de 45 MP con grabación de vídeo 8K, estabilización de imagen de 5 ejes y enfoque automático avanzado.",
-        price: 3899.99,
-        stock: true,
-        imgUrl: "https://example.com/canon_eos_r5.jpg"
+    constructor(
+        @InjectRepository(Products)
+        private productsRepository: Repository<Products>,
+        @InjectRepository(Categories)
+        private categoriesRepository: Repository<Categories>,
+    ){}
+
+    async getProducts(page:number,limit:number):Promise<Products[]>{
+        let products = await this.productsRepository.find({
+            relations:{
+                category: true,
+            }
+        })
+
+        const start = (page-1)*limit;
+        const end = start + + limit;
+        products = products.slice(start,end)
+        return products
     }
-];
-getProducts(){
-    return this.products
-}
+
+    getProduct(id:string){
+        const product = this.productsRepository.findOneBy({id})
+        if(!product){
+            return "product not found :c"
+        }
+        return product;
+    }
+
+    async addProducts(){
+        const categories = await this.categoriesRepository.find()
+        data?.map(async(element)=>{
+            const category = categories.find(
+                (category) => category.name === element.category
+            );
+
+            const product = new Products();
+            product.name = element.name
+            product.description = element.description
+            product.price = element.price
+            product.imgUrl = element.imgUrl
+            product.stock = element.stock
+            product.category = category
+
+            await this.productsRepository
+            .createQueryBuilder()
+            .insert()
+            .into(Products)
+            .values(product)
+            .orUpdate(["description","price","imgUrl","stock"],["name"])
+            .execute();
+
+        })
+
+        return "products added"
+    }
 }

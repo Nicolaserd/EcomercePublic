@@ -1,19 +1,15 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
 const validate = (request)=>{
- const authHeader = request.headers.authorization
- if(!authHeader){
-    return false
- }
- const auth = authHeader.split(" ")[1];
- if(!auth){
-    return false
- }
- const [email,password]=auth.split(":")
- if(!email||!password){
-    return false
- }
- return true
+   const email = request.headers.email;
+   const password = request.headers.password;
+
+   console.log(email, password);
+
+   if (!email || !password) {
+       return false;
+   }
+  return true
 }
 @Injectable()
 export class AuthGuard implements CanActivate {

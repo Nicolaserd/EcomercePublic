@@ -17,7 +17,10 @@ let ProductsController = class ProductsController {
         this.productsService = productsService;
     }
     getProducts() {
-        return this.productsService.getProducts();
+        return;
+    }
+    addProducts() {
+        return this.productsService.addProducts();
     }
 };
 exports.ProductsController = ProductsController;
@@ -27,6 +30,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "getProducts", null);
+__decorate([
+    (0, common_1.Get)("seeder"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "addProducts", null);
 exports.ProductsController = ProductsController = __decorate([
     (0, common_1.Controller)('products'),
     __metadata("design:paramtypes", [products_service_1.ProductsService])

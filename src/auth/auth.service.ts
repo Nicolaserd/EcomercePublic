@@ -14,14 +14,14 @@ export class AuthService {
             return "email and password required"
         }
         // ! Usar Repo user
-        const user = this.userRepository.getUsersByEmail(email)
-        if(!user){
-            return "user not found"
-        }
+        // const user = this.userRepository.getUsersByEmail(email)
+        // if(!user){
+        //     return "user not found"
+        // }
         //? Se deberia gregar un token en el return de abajo
-        if(user.password===password){
-            return "you are loggin :D con token (deberia enviarse)"
-        }
-        return "invalid credentials \-(uwu)-/"
+        // if(user.password===password){
+        //     return "you are loggin :D con token (deberia enviarse)"
+        // }
+        // return "invalid credentials \-(uwu)-/"
     }
 }

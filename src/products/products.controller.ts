@@ -6,7 +6,12 @@ export class ProductsController {
     constructor(private readonly productsService:ProductsService){}
     @Get()
     getProducts(){
-        return this.productsService.getProducts() ;   
+        return  ;   
+    }
+
+    @Get("seeder")
+    addProducts(){
+        return this.productsService.addProducts() ;   
     }
     
 }

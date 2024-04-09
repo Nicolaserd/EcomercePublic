@@ -1,13 +1,11 @@
-type Product = {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    stock: boolean;
-    imgUrl: string;
-};
+import { Categories } from "src/entities/categories.entity";
+import { Products } from "src/entities/products.entity";
+import { Repository } from "typeorm";
 export declare class ProductRepository {
-    private products;
-    getProducts(): Product[];
+    private productsRepository;
+    private categoriesRepository;
+    constructor(productsRepository: Repository<Products>, categoriesRepository: Repository<Categories>);
+    getProducts(page: number, limit: number): Promise<Products[]>;
+    getProduct(id: string): Promise<Products> | "product not found :c";
+    addProducts(): Promise<string>;
 }
-export {};

@@ -9,15 +9,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthGuard = void 0;
 const common_1 = require("@nestjs/common");
 const validate = (request) => {
-    const authHeader = request.headers.authorization;
-    if (!authHeader) {
-        return false;
-    }
-    const auth = authHeader.split(" ")[1];
-    if (!auth) {
-        return false;
-    }
-    const [email, password] = auth.split(":");
+    const email = request.headers.email;
+    const password = request.headers.password;
+    console.log(email, password);
     if (!email || !password) {
         return false;
     }
