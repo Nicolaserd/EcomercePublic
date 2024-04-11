@@ -12,22 +12,43 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const users_repository_1 = require("../users/users.repository");
+const jwt_1 = require("@nestjs/jwt");
 let AuthService = class AuthService {
-    constructor(userRepository) {
+    constructor(userRepository, jwtService) {
         this.userRepository = userRepository;
+        this.jwtService = jwtService;
     }
     getAuth() {
         return "Todos las Auth";
     }
-    signIn(email, password) {
-        if (!email || !password) {
-            return "email and password required";
+    async signIn(email, password) {
+        const userdb = await this.userRepository.getUserByEmail(email);
+        if (!userdb) {
+            throw new common_1.BadRequestException("Invalid credentials");
         }
+        if (userdb.password !== password) {
+            throw new common_1.BadRequestException("invalid credentials \-(uwu)-/");
+        }
+        const userPayload = {
+            sub: userdb.id,
+            id: userdb.id,
+            email: userdb.email
+        };
+        const token = this.jwtService.sign(userPayload);
+        return { success: "user logged in successfully", token };
+    }
+    async singUp(user) {
+        const userdb = await this.userRepository.getUserByEmail(user.email);
+        if (userdb) {
+            throw new common_1.BadRequestException("Email already exist in DB");
+        }
+        return;
     }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [users_repository_1.UserRepository])
+    __metadata("design:paramtypes", [users_repository_1.UserRepository,
+        jwt_1.JwtService])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map

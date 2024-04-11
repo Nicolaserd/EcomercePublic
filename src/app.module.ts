@@ -10,6 +10,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoriesModule } from './categories/categories.module';
 import { OrdersModule } from './orders/orders.module';
 import { FileUploadModule } from './file-upload/file-upload.module';
+import {JwtModule} from "@nestjs/jwt";
+import {config as dotenvConfig} from "dotenv";
+
+dotenvConfig({path:".env"});
 
 
 
@@ -35,7 +39,14 @@ import { FileUploadModule } from './file-upload/file-upload.module';
     AuthModule,
     CategoriesModule,
     OrdersModule,
-    FileUploadModule],
+    FileUploadModule,
+    JwtModule.register({
+      global:true,
+      //? Pasar un tiempo de vida al jwt
+      signOptions:{expiresIn:"1h"},
+      secret:process.env.JWT_SECRET,
+    })
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -21,7 +21,7 @@ export class UsersController {
     //!Post de usuario sustituido por POST /Auth/singup
     @Post()
     addUser(@Body() user:CreateUserDto){
-        // return this.userService.addUser(user)
+        return this.userService.addUser(user)
     }
     @Put(":id")
     @UseGuards(AuthGuard)
