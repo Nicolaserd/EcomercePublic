@@ -1,15 +1,15 @@
 // import { Test, TestingModule } from '@nestjs/testing';
-// import { UsersController } from './users.controller';
+// import { FileUploadController } from './file-upload.controller';
 
-// describe('UsersController', () => {
-//   let controller: UsersController;
+// describe('FileUploadController', () => {
+//   let controller: FileUploadController;
 
 //   beforeEach(async () => {
 //     const module: TestingModule = await Test.createTestingModule({
-//       controllers: [UsersController],
+//       controllers: [FileUploadController],
 //     }).compile();
 
-//     controller = module.get<UsersController>(UsersController);
+//     controller = module.get<FileUploadController>(FileUploadController);
 //   });
 
 //   it('should be defined', () => {

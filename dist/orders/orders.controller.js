@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrdersController = void 0;
 const common_1 = require("@nestjs/common");
 const orders_service_1 = require("./orders.service");
+const orders_dto_1 = require("./orders.dto");
 let OrdersController = class OrdersController {
     constructor(orderService) {
         this.orderService = orderService;
@@ -32,12 +33,12 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [orders_dto_1.CreateOrderDto]),
     __metadata("design:returntype", void 0)
 ], OrdersController.prototype, "addOrder", null);
 __decorate([
     (0, common_1.Get)(":id"),
-    __param(0, (0, common_1.Query)("id")),
+    __param(0, (0, common_1.Query)("id", common_1.ParseUUIDPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)

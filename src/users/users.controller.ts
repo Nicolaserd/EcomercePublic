@@ -18,9 +18,10 @@ export class UsersController {
     getUser(@Param("id",ParseUUIDPipe) id:string){
         return this.userService.getUser(id)
     }
+    //!Post de usuario sustituido por POST /Auth/singup
     @Post()
     addUser(@Body() user:CreateUserDto){
-        return this.userService.addUser(user)
+        // return this.userService.addUser(user)
     }
     @Put(":id")
     @UseGuards(AuthGuard)

@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { Users } from 'src/entities/users.entity';
 import { UserRepository } from 'src/users/users.repository';
 
 @Injectable()
@@ -8,7 +9,7 @@ export class AuthService {
         return "Todos las Auth";
     }
 
-    signIn(email:string,password:string){
+    async signIn(email:string,password:string){
         //! validar datos
         if(!email || !password){
             return "email and password required"
@@ -23,5 +24,13 @@ export class AuthService {
         //     return "you are loggin :D con token (deberia enviarse)"
         // }
         // return "invalid credentials \-(uwu)-/"
+    }
+    async singUp(user:Users){
+        const userdb = await this.userRepository.getUserByEmail(user.email);
+        if(userdb){
+            throw new BadRequestException("Email already exist in DB")
+        }
+        return;
+
     }
 }

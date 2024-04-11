@@ -16,6 +16,7 @@ exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
 const auth_guard_1 = require("../auth/guards/auth.guard");
+const users_dto_1 = require("./users.dto");
 let UsersController = class UsersController {
     constructor(userService) {
         this.userService = userService;
@@ -51,7 +52,7 @@ __decorate([
 ], UsersController.prototype, "getUsers", null);
 __decorate([
     (0, common_1.Get)(":id"),
-    __param(0, (0, common_1.Param)("id")),
+    __param(0, (0, common_1.Param)("id", common_1.ParseUUIDPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
@@ -60,13 +61,13 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [users_dto_1.CreateUserDto]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "addUser", null);
 __decorate([
     (0, common_1.Put)(":id"),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
-    __param(0, (0, common_1.Param)("id")),
+    __param(0, (0, common_1.Param)("id", common_1.ParseUUIDPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),
@@ -75,7 +76,7 @@ __decorate([
 __decorate([
     (0, common_1.Delete)(":id"),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
-    __param(0, (0, common_1.Param)("id")),
+    __param(0, (0, common_1.Param)("id", common_1.ParseUUIDPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
