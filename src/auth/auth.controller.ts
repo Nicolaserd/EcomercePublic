@@ -10,10 +10,7 @@ interface UserWithConfirmation extends CreateUserDto {
 @Controller('auth')
 export class AuthController {
     constructor(private readonly authService:AuthService){}
-    @Get()
-    getUsers(){
-        return this.authService.getAuth() ;   
-    }
+   
     @Post("/singin")
     singIn(@Body()credentials:LogginUserDto){
         const{email,password} = credentials;

@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Users } from 'src/entities/users.entity';
 import { UserRepository } from 'src/users/users.repository';
 import {JwtService} from  "@nestjs/jwt";
+import * as bcrypt from "bcrypt"
 
 
 
@@ -11,20 +12,22 @@ export class AuthService {
         private readonly userRepository:UserRepository,
         private readonly jwtService:JwtService
     ){}
-    getAuth(){
-        return "Todos las Auth";
-    }
+   
 
     async signIn(email:string,password:string){
 
         const userdb = await this.userRepository.getUserByEmail(email);
         if(!userdb){
-            throw new BadRequestException("Invalid credentials")
+            throw new BadRequestException("Invalid credentials\-(uwu)-/")
         }
-        if(userdb.password!==password){
-            throw new BadRequestException("invalid credentials \-(uwu)-/")
 
+        const passwordMatch = await bcrypt.compare(password, userdb.password)
+
+        if (!passwordMatch) {
+       
+            throw new BadRequestException("Invalid credentials\-(uwu)-/")
         }
+      
 
         const userPayload = {
             sub:userdb.id,
@@ -56,7 +59,13 @@ export class AuthService {
           }
        
           const { confirmPassword, ...userData } = user;
-          const userWithoutPassword = await this.userRepository.addUser(userData);
+          const {password, ...userwhitoutpassword}=userData
+          const hashedPassword = await bcrypt.hash(password,10)
+          const finalUser={
+            ... userwhitoutpassword,
+            password:hashedPassword,
+          }
+          const userWithoutPassword = await this.userRepository.addUser( finalUser);
 
 
           return userWithoutPassword;

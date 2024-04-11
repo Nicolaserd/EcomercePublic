@@ -38,7 +38,7 @@ __decorate([
 ], Users.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        length: 20,
+        length: 60,
         type: "varchar",
         nullable: false
     }),

@@ -20,9 +20,6 @@ let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
     }
-    getUsers() {
-        return this.authService.getAuth();
-    }
     singIn(credentials) {
         const { email, password } = credentials;
         return this.authService.signIn(email, password);
@@ -32,12 +29,6 @@ let AuthController = class AuthController {
     }
 };
 exports.AuthController = AuthController;
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AuthController.prototype, "getUsers", null);
 __decorate([
     (0, common_1.Post)("/singin"),
     __param(0, (0, common_1.Body)()),

@@ -7,7 +7,6 @@ interface UserWithConfirmation extends CreateUserDto {
 export declare class AuthController {
     private readonly authService;
     constructor(authService: AuthService);
-    getUsers(): string;
     singIn(credentials: LogginUserDto): Promise<{
         success: string;
         token: string;
