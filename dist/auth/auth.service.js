@@ -38,11 +38,19 @@ let AuthService = class AuthService {
         return { success: "user logged in successfully", token };
     }
     async singUp(user) {
+        if (!user) {
+            throw new common_1.BadRequestException("Invalid user");
+        }
         const userdb = await this.userRepository.getUserByEmail(user.email);
         if (userdb) {
             throw new common_1.BadRequestException("Email already exist in DB");
         }
-        return;
+        if (user.password !== user.confirmPassword) {
+            throw new common_1.BadRequestException('Passwords do not match');
+        }
+        const { confirmPassword, ...userData } = user;
+        const userWithoutPassword = await this.userRepository.addUser(userData);
+        return userWithoutPassword;
     }
 };
 exports.AuthService = AuthService;

@@ -10,5 +10,5 @@ export declare class AuthService {
         success: string;
         token: string;
     }>;
-    singUp(user: Users): Promise<void>;
+    singUp(user: any): Promise<Partial<Users>>;
 }

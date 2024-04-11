@@ -1,5 +1,9 @@
 import { AuthService } from './auth.service';
-import { LogginUserDto } from 'src/users/users.dto';
+import { CreateUserDto, LogginUserDto } from 'src/users/users.dto';
+import { Users } from 'src/entities/users.entity';
+interface UserWithConfirmation extends CreateUserDto {
+    confirmPassword?: string;
+}
 export declare class AuthController {
     private readonly authService;
     constructor(authService: AuthService);
@@ -8,4 +12,6 @@ export declare class AuthController {
         success: string;
         token: string;
     }>;
+    singUp(user: UserWithConfirmation): Promise<Partial<Users>>;
 }
+export {};

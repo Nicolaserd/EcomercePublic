@@ -27,6 +27,9 @@ let AuthController = class AuthController {
         const { email, password } = credentials;
         return this.authService.signIn(email, password);
     }
+    singUp(user) {
+        return this.authService.singUp(user);
+    }
 };
 exports.AuthController = AuthController;
 __decorate([
@@ -42,6 +45,13 @@ __decorate([
     __metadata("design:paramtypes", [users_dto_1.LogginUserDto]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "singIn", null);
+__decorate([
+    (0, common_1.Post)("/signup"),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "singUp", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
