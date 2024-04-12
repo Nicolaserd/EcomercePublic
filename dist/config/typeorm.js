@@ -16,7 +16,6 @@ const config = {
     migrations: ['dist/migrations/*{.ts,.js}'],
     autoLoadEntities: true,
     synchronize: true,
-    dropSchema: true,
 };
 exports.default = (0, config_1.registerAs)('typeorm', () => config);
 exports.connectionSource = new typeorm_1.DataSource(config);

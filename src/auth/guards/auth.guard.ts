@@ -31,13 +31,13 @@ export class AuthGuard implements CanActivate {
       //* se extre al info
       //* se verifica que el token sea valido dentro de la aplicacion
       const secret = process.env.JWT_SECRET;
-      //! try catch por si lo de abjo falla
+    
       const payload = this.jwtService
         .verifyAsync(token, { secret })
         .then((payload) => {
-          //! se verifica la fecha de creacion
+         
           payload.iat = new Date(payload.iat * 1000);
-          //!se permite extrar la fecha por la hora con el formato de conversion da el tiempod expiracion
+         
           payload.exp = new Date(payload.exp * 1000);
 
           return payload;

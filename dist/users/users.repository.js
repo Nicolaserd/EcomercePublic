@@ -60,8 +60,7 @@ let UserRepository = class UserRepository {
     }
     async getUserByEmail(email) {
         const user = await this.usersRepository.findOneBy({ email });
-        const { password, isAdmin, ...userWhitoutPasswordandAdmin } = user;
-        return userWhitoutPasswordandAdmin;
+        return user;
     }
 };
 exports.UserRepository = UserRepository;

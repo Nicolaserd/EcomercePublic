@@ -10,7 +10,6 @@ declare const _default: (() => {
     migrations: string[];
     autoLoadEntities: boolean;
     synchronize: boolean;
-    dropSchema: boolean;
 }) & import("@nestjs/config").ConfigFactoryKeyHost<{
     type: string;
     host: string;
@@ -22,7 +21,6 @@ declare const _default: (() => {
     migrations: string[];
     autoLoadEntities: boolean;
     synchronize: boolean;
-    dropSchema: boolean;
 }>;
 export default _default;
 export declare const connectionSource: DataSource;
