@@ -13,7 +13,7 @@ const toStream = require("buffer-to-stream");
 let FileUploadRepository = class FileUploadRepository {
     async uploadImage(file) {
         return new Promise((resolve, reject) => {
-            const upload = cloudinary_1.v2.uploader.upload_stream({ resource_type: "auto" }, (error, result) => {
+            const upload = cloudinary_1.v2.uploader.upload_stream({ resource_type: 'auto' }, (error, result) => {
                 if (error) {
                     reject(error);
                 }

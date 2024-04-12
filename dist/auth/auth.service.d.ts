@@ -1,6 +1,6 @@
 import { Users } from 'src/entities/users.entity';
 import { UserRepository } from 'src/users/users.repository';
-import { JwtService } from "@nestjs/jwt";
+import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from 'src/users/users.dto';
 interface UserWithConfirmation extends CreateUserDto {
     confirmPassword?: string;

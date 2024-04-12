@@ -3,13 +3,13 @@ import { OrdersRepository } from './orders.repository';
 
 @Injectable()
 export class OrdersService {
-    constructor (private readonly ordersRepository:OrdersRepository){}
+  constructor(private readonly ordersRepository: OrdersRepository) {}
 
-    addOrder(userId:string,products:any){
-        return this.ordersRepository.addOrder(userId,products);
-    }
+  addOrder(userId: string, products: any) {
+    return this.ordersRepository.addOrder(userId, products);
+  }
 
-    getOrder(id:string){
-        return this.ordersRepository.getOrder(id);
-    }
+  getOrder(id: string) {
+    return this.ordersRepository.getOrder(id);
+  }
 }

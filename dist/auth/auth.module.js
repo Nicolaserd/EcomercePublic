@@ -20,7 +20,7 @@ exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
         controllers: [auth_controller_1.AuthController],
         providers: [auth_service_1.AuthService, users_repository_1.UserRepository],
-        imports: [typeorm_1.TypeOrmModule.forFeature([users_entity_1.Users])]
+        imports: [typeorm_1.TypeOrmModule.forFeature([users_entity_1.Users])],
     })
 ], AuthModule);
 //# sourceMappingURL=auth.module.js.map

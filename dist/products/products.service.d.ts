@@ -5,6 +5,6 @@ export declare class ProductsService {
     constructor(productsRepository: ProductRepository);
     addProducts(): Promise<string>;
     getProducts(page: number, limit: number): Promise<Products[]>;
-    getProduct(id: string): Promise<Products> | "product not found :c";
+    getProduct(id: string): Promise<Products>;
     updateProduct(id: string, product: Products): Promise<Products>;
 }

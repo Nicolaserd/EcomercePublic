@@ -27,20 +27,20 @@ let FileUploadController = class FileUploadController {
 };
 exports.FileUploadController = FileUploadController;
 __decorate([
-    (0, common_1.Post)("uploadImage/:id"),
+    (0, common_1.Post)('uploadImage/:id'),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
-    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)("file")),
-    __param(0, (0, common_1.Param)("id")),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.UploadedFile)(new common_1.ParseFilePipe({
         validators: [
             new common_1.MaxFileSizeValidator({
                 maxSize: 200000,
-                message: "file is to large >:C"
+                message: 'file is to large >:C',
             }),
             new common_1.FileTypeValidator({
                 fileType: /(jpg|jpeg|png|webp)$/,
-            })
-        ]
+            }),
+        ],
     }))),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),

@@ -25,17 +25,17 @@ __decorate([
     __metadata("design:type", Date)
 ], Orders.prototype, "date", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => users_entity_1.Users, user => user.orders),
-    (0, typeorm_1.JoinColumn)({ name: "user_id" }),
+    (0, typeorm_1.ManyToOne)(() => users_entity_1.Users, (user) => user.orders),
+    (0, typeorm_1.JoinColumn)({ name: 'user_id' }),
     __metadata("design:type", users_entity_1.Users)
 ], Orders.prototype, "user", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => orderdetails_entity_1.OrderDetails, orderDetail => orderDetail.order),
+    (0, typeorm_1.OneToOne)(() => orderdetails_entity_1.OrderDetails, (orderDetail) => orderDetail.order),
     __metadata("design:type", orderdetails_entity_1.OrderDetails)
 ], Orders.prototype, "orderDetails", void 0);
 exports.Orders = Orders = __decorate([
     (0, typeorm_1.Entity)({
-        name: "ORDERS"
+        name: 'ORDERS',
     })
 ], Orders);
 //# sourceMappingURL=orders.entity.js.map

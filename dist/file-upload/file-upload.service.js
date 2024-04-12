@@ -26,14 +26,14 @@ let FileUploadService = class FileUploadService {
     async uploadImage(file, productId) {
         const product = await this.productsRepository.findOneBy({ id: productId });
         if (!product) {
-            throw new common_1.NotFoundException("PRODUCT NOT FOUND :C");
+            throw new common_1.NotFoundException('PRODUCT NOT FOUND :C');
         }
         const uploadedImage = await this.fileUploadRepository.uploadImage(file);
         await this.productsRepository.update(product.id, {
             imgUrl: uploadedImage.secure_url,
         });
         const updatedProduct = await this.productsRepository.findOneBy({
-            id: productId
+            id: productId,
         });
         return updatedProduct;
     }

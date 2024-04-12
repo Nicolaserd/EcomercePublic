@@ -21,7 +21,7 @@ exports.FileUploadModule = FileUploadModule = __decorate([
     (0, common_1.Module)({
         providers: [file_upload_service_1.FileUploadService, cloudinary_1.CloudinaryConfig, file_upload_repository_1.FileUploadRepository],
         controllers: [file_upload_controller_1.FileUploadController],
-        imports: [typeorm_1.TypeOrmModule.forFeature([products_entity_1.Products])]
+        imports: [typeorm_1.TypeOrmModule.forFeature([products_entity_1.Products])],
     })
 ], FileUploadModule);
 //# sourceMappingURL=file-upload.module.js.map

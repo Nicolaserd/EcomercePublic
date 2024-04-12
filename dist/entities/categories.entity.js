@@ -22,20 +22,20 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({
         length: 50,
-        type: "varchar",
+        type: 'varchar',
         nullable: false,
-        unique: true
+        unique: true,
     }),
     __metadata("design:type", String)
 ], Categories.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => products_entity_1.Products, product => product.category),
+    (0, typeorm_1.OneToMany)(() => products_entity_1.Products, (product) => product.category),
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", Array)
 ], Categories.prototype, "products", void 0);
 exports.Categories = Categories = __decorate([
     (0, typeorm_1.Entity)({
-        name: "CATEGORIES"
+        name: 'CATEGORIES',
     })
 ], Categories);
 //# sourceMappingURL=categories.entity.js.map

@@ -7,8 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Products } from 'src/entities/products.entity';
 
 @Module({
-  providers: [FileUploadService,CloudinaryConfig,FileUploadRepository],
+  providers: [FileUploadService, CloudinaryConfig, FileUploadRepository],
   controllers: [FileUploadController],
-  imports:[TypeOrmModule.forFeature([Products])]
+  imports: [TypeOrmModule.forFeature([Products])],
 })
 export class FileUploadModule {}

@@ -1,6 +1,5 @@
-import { Orders } from "src/entities/orders.entity";
-import { Users } from "src/entities/users.entity";
-import { Repository } from "typeorm";
+import { Users } from 'src/entities/users.entity';
+import { Repository } from 'typeorm';
 export declare class UserRepository {
     private usersRepository;
     constructor(usersRepository: Repository<Users>);
@@ -13,8 +12,7 @@ export declare class UserRepository {
         country: string;
         address: string;
         city: string;
-        isAdmin: boolean;
-        orders: Orders[];
+        orders: import("src/entities/orders.entity").Orders[];
     }>;
     addUser(user: Partial<Users>): Promise<Partial<Users>>;
     updateUser(id: string, user: Users): Promise<{
@@ -25,9 +23,8 @@ export declare class UserRepository {
         country: string;
         address: string;
         city: string;
-        isAdmin: boolean;
-        orders: Orders[];
+        orders: import("src/entities/orders.entity").Orders[];
     }>;
     deleteUser(id: string): Promise<Partial<Users>>;
-    getUserByEmail(email: string): Promise<Users>;
+    getUserByEmail(email: string): Promise<Partial<Users>>;
 }

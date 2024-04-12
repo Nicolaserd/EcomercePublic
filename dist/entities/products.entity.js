@@ -25,52 +25,52 @@ __decorate([
         length: 50,
         unique: true,
         nullable: false,
-        type: "varchar"
+        type: 'varchar',
     }),
     __metadata("design:type", String)
 ], Products.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         nullable: false,
-        type: "text"
+        type: 'text',
     }),
     __metadata("design:type", String)
 ], Products.prototype, "description", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         nullable: false,
-        type: "decimal",
+        type: 'decimal',
         precision: 10,
-        scale: 2
+        scale: 2,
     }),
     __metadata("design:type", Number)
 ], Products.prototype, "price", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "int",
-        nullable: false
+        type: 'int',
+        nullable: false,
     }),
     __metadata("design:type", Number)
 ], Products.prototype, "stock", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         nullable: true,
-        type: "text"
+        type: 'text',
     }),
     __metadata("design:type", String)
 ], Products.prototype, "imgUrl", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => categories_entity_1.Categories, (category) => category.products),
-    (0, typeorm_1.JoinColumn)({ name: "category_id" }),
+    (0, typeorm_1.JoinColumn)({ name: 'category_id' }),
     __metadata("design:type", categories_entity_1.Categories)
 ], Products.prototype, "category", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => orderdetails_entity_1.OrderDetails, orderDetail => orderDetail.products),
+    (0, typeorm_1.ManyToMany)(() => orderdetails_entity_1.OrderDetails, (orderDetail) => orderDetail.products),
     __metadata("design:type", Array)
 ], Products.prototype, "orderDetails", void 0);
 exports.Products = Products = __decorate([
     (0, typeorm_1.Entity)({
-        name: "PRODUCTS"
+        name: 'PRODUCTS',
     })
 ], Products);
 //# sourceMappingURL=products.entity.js.map

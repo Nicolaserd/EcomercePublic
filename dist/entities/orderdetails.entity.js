@@ -22,27 +22,27 @@ __decorate([
 ], OrderDetails.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "decimal",
+        type: 'decimal',
         precision: 10,
-        scale: 2
+        scale: 2,
     }),
     __metadata("design:type", Number)
 ], OrderDetails.prototype, "price", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => orders_entity_1.Orders, order => order.orderDetails),
-    (0, typeorm_1.JoinColumn)({ name: "order_id" }),
+    (0, typeorm_1.OneToOne)(() => orders_entity_1.Orders, (order) => order.orderDetails),
+    (0, typeorm_1.JoinColumn)({ name: 'order_id' }),
     __metadata("design:type", orders_entity_1.Orders)
 ], OrderDetails.prototype, "order", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => products_entity_1.Products),
     (0, typeorm_1.JoinTable)({
-        name: "ORDER_DETAILS_PRODUCTS"
+        name: 'ORDER_DETAILS_PRODUCTS',
     }),
     __metadata("design:type", Array)
 ], OrderDetails.prototype, "products", void 0);
 exports.OrderDetails = OrderDetails = __decorate([
     (0, typeorm_1.Entity)({
-        name: "ORDER_DETAILS"
+        name: 'ORDER_DETAILS',
     })
 ], OrderDetails);
 //# sourceMappingURL=orderdetails.entity.js.map

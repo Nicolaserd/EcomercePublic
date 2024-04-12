@@ -26,40 +26,42 @@ let UserRepository = class UserRepository {
         const start = (page - 1) * limit;
         const end = start + +limit;
         users = users.slice(start, end);
-        return users.map(({ password, ...user }) => user);
+        return users.map(({ password, isAdmin, ...user }) => user);
     }
     async getUser(id) {
         const user = await this.usersRepository.findOne({
             where: { id },
             relations: {
                 orders: true,
-            }
+            },
         });
         if (!user) {
             throw new common_1.NotFoundException('user not found');
         }
-        const { password, ...userWithoutPassword } = user;
-        return userWithoutPassword;
+        const { password, isAdmin, ...userWhitoutPasswordandAdmin } = user;
+        return userWhitoutPasswordandAdmin;
     }
     async addUser(user) {
         const newUser = await this.usersRepository.save(user);
-        const { password, ...userWhitoutPassword } = newUser;
-        return userWhitoutPassword;
+        const { password, isAdmin, ...userWhitoutPasswordandAdmin } = newUser;
+        return userWhitoutPasswordandAdmin;
     }
     async updateUser(id, user) {
         await this.usersRepository.update(id, user);
         const updateUser = await this.usersRepository.findOneBy({ id });
-        const { password, ...userWithoutPassword } = updateUser;
-        return userWithoutPassword;
+        const { password, isAdmin, ...userWhitoutPasswordandAdmin } = updateUser;
+        return userWhitoutPasswordandAdmin;
     }
     async deleteUser(id) {
         const user = await this.usersRepository.findOneBy({ id });
         this.usersRepository.remove(user);
-        const { password, ...userWithoutPassword } = user;
-        return userWithoutPassword;
+        const { password, isAdmin, ...userWhitoutPasswordandAdmin } = user;
+        return userWhitoutPasswordandAdmin;
     }
     async getUserByEmail(email) {
-        return await this.usersRepository.findOneBy({ email });
+        const user = await this.usersRepository.findOneBy({ email });
+        const { password, isAdmin, ...userWhitoutPasswordandAdmin } = user;
+        return userWhitoutPasswordandAdmin;
     }
 };
 exports.UserRepository = UserRepository;

@@ -30,14 +30,14 @@ let AuthController = class AuthController {
 };
 exports.AuthController = AuthController;
 __decorate([
-    (0, common_1.Post)("/singin"),
+    (0, common_1.Post)('/singin'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [users_dto_1.LogginUserDto]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "singIn", null);
 __decorate([
-    (0, common_1.Post)("/signup"),
+    (0, common_1.Post)('/signup'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),

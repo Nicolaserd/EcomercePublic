@@ -21,7 +21,7 @@ const orders_module_1 = require("./orders/orders.module");
 const file_upload_module_1 = require("./file-upload/file-upload.module");
 const jwt_1 = require("@nestjs/jwt");
 const dotenv_1 = require("dotenv");
-(0, dotenv_1.config)({ path: ".env" });
+(0, dotenv_1.config)({ path: '.env' });
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -34,7 +34,7 @@ exports.AppModule = AppModule = __decorate([
             }),
             typeorm_2.TypeOrmModule.forRootAsync({
                 inject: [config_1.ConfigService],
-                useFactory: (config) => config.get("typeorm")
+                useFactory: (config) => config.get('typeorm'),
             }),
             users_module_1.UsersModule,
             products_module_1.ProductsModule,
@@ -44,9 +44,9 @@ exports.AppModule = AppModule = __decorate([
             file_upload_module_1.FileUploadModule,
             jwt_1.JwtModule.register({
                 global: true,
-                signOptions: { expiresIn: "1h" },
+                signOptions: { expiresIn: '1h' },
                 secret: process.env.JWT_SECRET,
-            })
+            }),
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

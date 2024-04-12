@@ -1,4 +1,4 @@
-import { DataSource } from "typeorm";
+import { DataSource } from 'typeorm';
 declare const _default: (() => {
     type: string;
     host: string;

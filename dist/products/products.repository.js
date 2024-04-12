@@ -28,7 +28,7 @@ let ProductRepository = class ProductRepository {
         let products = await this.productsRepository.find({
             relations: {
                 category: true,
-            }
+            },
         });
         const start = (page - 1) * limit;
         const end = start + +limit;
@@ -38,7 +38,7 @@ let ProductRepository = class ProductRepository {
     getProduct(id) {
         const product = this.productsRepository.findOneBy({ id });
         if (!product) {
-            return "product not found :c";
+            throw new common_1.NotFoundException('product not found :c');
         }
         return product;
     }
@@ -58,10 +58,10 @@ let ProductRepository = class ProductRepository {
                 .insert()
                 .into(products_entity_1.Products)
                 .values(product)
-                .orUpdate(["description", "price", "imgUrl", "stock"], ["name"])
+                .orUpdate(['description', 'price', 'imgUrl', 'stock'], ['name'])
                 .execute();
         });
-        return "products added";
+        return 'products added';
     }
     async updateProduct(id, product) {
         await this.productsRepository.update(id, product);

@@ -23,8 +23,8 @@ exports.ProductsModule = ProductsModule = __decorate([
         providers: [products_service_1.ProductsService, products_repository_1.ProductRepository],
         imports: [
             typeorm_1.TypeOrmModule.forFeature([products_entity_1.Products]),
-            typeorm_1.TypeOrmModule.forFeature([categories_entity_1.Categories])
-        ]
+            typeorm_1.TypeOrmModule.forFeature([categories_entity_1.Categories]),
+        ],
     })
 ], ProductsModule);
 //# sourceMappingURL=products.module.js.map

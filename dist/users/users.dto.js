@@ -32,7 +32,7 @@ __decorate([
     (0, class_validator_1.MinLength)(8, { message: 'La contraseña debe tener al menos 8 caracteres' }),
     (0, class_validator_1.MaxLength)(15, { message: 'La contraseña no debe superar los 15 caracteres' }),
     (0, class_validator_1.Matches)(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]*$/, {
-        message: 'La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y uno de los siguientes caracteres especiales: !@#$%^&*'
+        message: 'La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y uno de los siguientes caracteres especiales: !@#$%^&*',
     }),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "password", void 0);
@@ -66,8 +66,8 @@ __decorate([
     __metadata("design:type", Boolean)
 ], CreateUserDto.prototype, "isAdmin", void 0);
 class LogginUserDto extends (0, swagger_1.PickType)(CreateUserDto, [
-    "password",
-    "email"
+    'password',
+    'email',
 ]) {
 }
 exports.LogginUserDto = LogginUserDto;

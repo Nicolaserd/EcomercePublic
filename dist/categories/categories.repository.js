@@ -35,7 +35,7 @@ let CategoriesRepository = class CategoriesRepository {
                 .onConflict(`("name")DO NOTHING`)
                 .execute();
         });
-        return "Categories added";
+        return 'Categories added';
     }
 };
 exports.CategoriesRepository = CategoriesRepository;

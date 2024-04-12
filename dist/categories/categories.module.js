@@ -20,7 +20,7 @@ exports.CategoriesModule = CategoriesModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([categories_entity_1.Categories])],
         providers: [categories_service_1.CategoriesService, categories_repository_1.CategoriesRepository],
-        controllers: [categories_controller_1.CategoriesController]
+        controllers: [categories_controller_1.CategoriesController],
     })
 ], CategoriesModule);
 //# sourceMappingURL=categories.module.js.map

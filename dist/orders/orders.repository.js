@@ -31,7 +31,7 @@ let OrdersRepository = class OrdersRepository {
         let total = 0;
         const user = await this.userRepository.findOneBy({ id: userId });
         if (!user) {
-            return "user not found";
+            throw new common_1.NotFoundException('user not found');
         }
         const order = new orders_entity_1.Orders();
         order.date = new Date();
@@ -42,7 +42,7 @@ let OrdersRepository = class OrdersRepository {
                 id: element.id,
             });
             if (!product) {
-                return "product not found";
+                throw new common_1.NotFoundException('product not found');
             }
             total += Number(product.price);
             await this.productsRepository.update({ id: element.id }, { stock: product.stock - 1 });
@@ -58,8 +58,8 @@ let OrdersRepository = class OrdersRepository {
         return await this.ordersRepository.find({
             where: { id: newOrder.id },
             relations: {
-                orderDetails: true
-            }
+                orderDetails: true,
+            },
         });
     }
     async getOrder(id) {
@@ -72,7 +72,7 @@ let OrdersRepository = class OrdersRepository {
             },
         });
         if (!order) {
-            return "order not found";
+            throw new common_1.NotFoundException('order not found');
         }
         return order;
     }

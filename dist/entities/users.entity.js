@@ -22,8 +22,8 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({
         length: 50,
-        type: "varchar",
-        nullable: false
+        type: 'varchar',
+        nullable: false,
     }),
     __metadata("design:type", String)
 ], Users.prototype, "name", void 0);
@@ -31,43 +31,43 @@ __decorate([
     (0, typeorm_1.Column)({
         length: 50,
         unique: true,
-        type: "varchar",
-        nullable: false
+        type: 'varchar',
+        nullable: false,
     }),
     __metadata("design:type", String)
 ], Users.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         length: 60,
-        type: "varchar",
-        nullable: false
+        type: 'varchar',
+        nullable: false,
     }),
     __metadata("design:type", String)
 ], Users.prototype, "password", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "int",
-        nullable: true
+        type: 'int',
+        nullable: true,
     }),
     __metadata("design:type", Number)
 ], Users.prototype, "phone", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         nullable: true,
-        length: 50
+        length: 50,
     }),
     __metadata("design:type", String)
 ], Users.prototype, "country", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        nullable: true
+        nullable: true,
     }),
     __metadata("design:type", String)
 ], Users.prototype, "address", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         nullable: true,
-        length: 50
+        length: 50,
     }),
     __metadata("design:type", String)
 ], Users.prototype, "city", void 0);
@@ -76,13 +76,13 @@ __decorate([
     __metadata("design:type", Boolean)
 ], Users.prototype, "isAdmin", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => orders_entity_1.Orders, order => order.user),
-    (0, typeorm_1.JoinColumn)({ name: "orders_id" }),
+    (0, typeorm_1.OneToMany)(() => orders_entity_1.Orders, (order) => order.user),
+    (0, typeorm_1.JoinColumn)({ name: 'orders_id' }),
     __metadata("design:type", Array)
 ], Users.prototype, "orders", void 0);
 exports.Users = Users = __decorate([
     (0, typeorm_1.Entity)({
-        name: "USERS"
+        name: 'USERS',
     })
 ], Users);
 //# sourceMappingURL=users.entity.js.map

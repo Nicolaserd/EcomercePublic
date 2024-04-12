@@ -12,7 +12,6 @@ export declare class UsersController {
         country: string;
         address: string;
         city: string;
-        isAdmin: boolean;
         orders: import("src/entities/orders.entity").Orders[];
     }>;
     updateUser(id: string, user: any): Promise<{
@@ -23,9 +22,8 @@ export declare class UsersController {
         country: string;
         address: string;
         city: string;
-        isAdmin: boolean;
         orders: import("src/entities/orders.entity").Orders[];
     }>;
     deleteUser(id: string): Promise<Partial<Users>>;
-    getUserByEmail(email: string): Promise<Users>;
+    getUserByEmail(email: string): Promise<Partial<Users>>;
 }

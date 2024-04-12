@@ -1,62 +1,68 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
 import { Orders } from './orders.entity';
 
 @Entity({
-    name:"USERS"
+  name: 'USERS',
 })
 export class Users {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ 
+  @Column({
     length: 50,
-    type:"varchar",
-    nullable:false
-})
+    type: 'varchar',
+    nullable: false,
+  })
   name: string;
 
-  @Column({ 
-    length: 50, 
+  @Column({
+    length: 50,
     unique: true,
-    type:"varchar",
-    nullable:false 
-})
+    type: 'varchar',
+    nullable: false,
+  })
   email: string;
 
-  @Column({ 
+  @Column({
     length: 60,
-    type:"varchar",
-    nullable:false
-})
+    type: 'varchar',
+    nullable: false,
+  })
   password: string;
 
-  @Column({ 
-    type:"int",
-    nullable: true
-})
+  @Column({
+    type: 'int',
+    nullable: true,
+  })
   phone: number;
 
-  @Column({ 
-    nullable: true, 
-    length: 50
-})
+  @Column({
+    nullable: true,
+    length: 50,
+  })
   country: string;
 
-  @Column({ 
-    nullable: true 
-})
+  @Column({
+    nullable: true,
+  })
   address: string;
 
-  @Column({ 
-    nullable: true, 
-    length: 50 
-})
+  @Column({
+    nullable: true,
+    length: 50,
+  })
   city: string;
 
-  @Column({default: false})
-  isAdmin:boolean;
+  @Column({ default: false })
+  isAdmin: boolean;
 
-  @OneToMany(() => Orders, order => order.user)
-  @JoinColumn({name:"orders_id"})
+  @OneToMany(() => Orders, (order) => order.user)
+  @JoinColumn({ name: 'orders_id' })
   orders: Orders[];
 }
