@@ -1,10 +1,10 @@
 import { UsersService } from './users.service';
-import { CreateUserDto } from './users.dto';
+import { Users } from 'src/entities/users.entity';
 export declare class UsersController {
     private readonly userService;
     constructor(userService: UsersService);
-    getUsers(page?: number, limit?: number): Promise<Partial<import("src/entities/users.entity").Users>[]>;
-    getUser(id: string): Promise<"user not found" | {
+    getUsers(page?: number, limit?: number): Promise<Partial<Users>[]>;
+    getUser(id: string): Promise<{
         id: string;
         name: string;
         email: string;
@@ -12,9 +12,9 @@ export declare class UsersController {
         country: string;
         address: string;
         city: string;
+        isAdmin: boolean;
         orders: import("src/entities/orders.entity").Orders[];
     }>;
-    addUser(user: CreateUserDto): Promise<Partial<import("src/entities/users.entity").Users>>;
     updateUser(id: string, user: any): Promise<{
         id: string;
         name: string;
@@ -23,8 +23,9 @@ export declare class UsersController {
         country: string;
         address: string;
         city: string;
+        isAdmin: boolean;
         orders: import("src/entities/orders.entity").Orders[];
     }>;
-    deleteUser(id: string): Promise<Partial<import("src/entities/users.entity").Users>>;
-    getUserByEmail(email: string): Promise<import("src/entities/users.entity").Users>;
+    deleteUser(id: string): Promise<Partial<Users>>;
+    getUserByEmail(email: string): Promise<Users>;
 }

@@ -14,6 +14,7 @@ const common_1 = require("@nestjs/common");
 const users_repository_1 = require("../users/users.repository");
 const jwt_1 = require("@nestjs/jwt");
 const bcrypt = require("bcrypt");
+const roles_enum_1 = require("./roles.enum");
 let AuthService = class AuthService {
     constructor(userRepository, jwtService) {
         this.userRepository = userRepository;
@@ -31,7 +32,8 @@ let AuthService = class AuthService {
         const userPayload = {
             sub: userdb.id,
             id: userdb.id,
-            email: userdb.email
+            email: userdb.email,
+            roles: [userdb.isAdmin ? roles_enum_1.Role.Admin : roles_enum_1.Role.User]
         };
         const token = this.jwtService.sign(userPayload);
         return { success: "user logged in successfully", token };

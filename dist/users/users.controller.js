@@ -16,7 +16,9 @@ exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
 const auth_guard_1 = require("../auth/guards/auth.guard");
-const users_dto_1 = require("./users.dto");
+const roles_decorator_1 = require("../decorators/roles.decorator");
+const roles_enum_1 = require("../auth/roles.enum");
+const roles_guard_1 = require("../auth/guards/roles.guard");
 let UsersController = class UsersController {
     constructor(userService) {
         this.userService = userService;
@@ -26,9 +28,6 @@ let UsersController = class UsersController {
     }
     getUser(id) {
         return this.userService.getUser(id);
-    }
-    addUser(user) {
-        return this.userService.addUser(user);
     }
     updateUser(id, user) {
         return this.userService.updateUser(id, user);
@@ -43,7 +42,8 @@ let UsersController = class UsersController {
 exports.UsersController = UsersController;
 __decorate([
     (0, common_1.Get)(),
-    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard, roles_guard_1.RolesGuard),
     __param(0, (0, common_1.Query)('page')),
     __param(1, (0, common_1.Query)('limit')),
     __metadata("design:type", Function),
@@ -51,19 +51,12 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "getUsers", null);
 __decorate([
-    (0, common_1.Get)(":id"),
+    (0, common_1.Get)("id/:id"),
     __param(0, (0, common_1.Param)("id", common_1.ParseUUIDPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "getUser", null);
-__decorate([
-    (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [users_dto_1.CreateUserDto]),
-    __metadata("design:returntype", void 0)
-], UsersController.prototype, "addUser", null);
 __decorate([
     (0, common_1.Put)(":id"),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
@@ -82,8 +75,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "deleteUser", null);
 __decorate([
-    (0, common_1.Get)(":email"),
-    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    (0, common_1.Get)("email/:email"),
     __param(0, (0, common_1.Param)("email")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

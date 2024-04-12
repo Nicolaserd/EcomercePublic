@@ -5,7 +5,7 @@ export declare class UserRepository {
     private usersRepository;
     constructor(usersRepository: Repository<Users>);
     getUsers(page: number, limit: number): Promise<Partial<Users>[]>;
-    getUser(id: string): Promise<"user not found" | {
+    getUser(id: string): Promise<{
         id: string;
         name: string;
         email: string;
@@ -13,9 +13,10 @@ export declare class UserRepository {
         country: string;
         address: string;
         city: string;
+        isAdmin: boolean;
         orders: Orders[];
     }>;
-    addUser(user: Users): Promise<Partial<Users>>;
+    addUser(user: Partial<Users>): Promise<Partial<Users>>;
     updateUser(id: string, user: Users): Promise<{
         id: string;
         name: string;
@@ -24,6 +25,7 @@ export declare class UserRepository {
         country: string;
         address: string;
         city: string;
+        isAdmin: boolean;
         orders: Orders[];
     }>;
     deleteUser(id: string): Promise<Partial<Users>>;

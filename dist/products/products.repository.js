@@ -63,6 +63,11 @@ let ProductRepository = class ProductRepository {
         });
         return "products added";
     }
+    async updateProduct(id, product) {
+        await this.productsRepository.update(id, product);
+        const updateProduct = await this.productsRepository.findOneBy({ id });
+        return updateProduct;
+    }
 };
 exports.ProductRepository = ProductRepository;
 exports.ProductRepository = ProductRepository = __decorate([

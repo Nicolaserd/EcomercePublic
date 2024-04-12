@@ -45,7 +45,7 @@ __decorate([
 ], CreateUserDto.prototype, "address", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'El número de teléfono es obligatorio' }),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], CreateUserDto.prototype, "phone", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: 'El país es obligatorio' }),
@@ -61,6 +61,10 @@ __decorate([
     (0, class_validator_1.MaxLength)(20, { message: 'La ciudad no debe superar los 20 caracteres' }),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "city", void 0);
+__decorate([
+    (0, class_validator_1.IsEmpty)(),
+    __metadata("design:type", Boolean)
+], CreateUserDto.prototype, "isAdmin", void 0);
 class LogginUserDto extends (0, swagger_1.PickType)(CreateUserDto, [
     "password",
     "email"

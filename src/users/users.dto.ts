@@ -1,6 +1,7 @@
-import { IsEmail, IsNotEmpty, IsString, Matches, MaxLength, MinLength } from 'class-validator';
+import { IsEmail, IsEmpty, IsNotEmpty, IsString, Matches, MaxLength, MinLength } from 'class-validator';
 
 import { PickType } from '@nestjs/swagger';
+import { isEmpty } from 'rxjs';
 
 export class CreateUserDto {
     @IsNotEmpty({ message: 'El nombre es obligatorio' })
@@ -28,7 +29,7 @@ export class CreateUserDto {
     address: string;
 
     @IsNotEmpty({ message: 'El número de teléfono es obligatorio' })
-    phone: string;
+    phone: number;
 
     @IsNotEmpty({ message: 'El país es obligatorio' })
     @IsString({ message: 'El país debe ser una cadena de caracteres' })
@@ -41,6 +42,9 @@ export class CreateUserDto {
     @MinLength(5, { message: 'La ciudad debe tener al menos 5 caracteres' })
     @MaxLength(20, { message: 'La ciudad no debe superar los 20 caracteres' })
     city: string;
+
+    @IsEmpty()
+    isAdmin:boolean;
 }
 
 //!AQUI ESTA EL DTO DE AUTH

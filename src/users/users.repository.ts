@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Orders } from "src/entities/orders.entity";
 import { Users } from "src/entities/users.entity";
@@ -26,14 +26,15 @@ export class UserRepository{
         }
     })
     if(!user){
-        return"user not found"
+        
+        throw new NotFoundException('user not found');
     }
 
     const{password,...userWithoutPassword}=user
     return userWithoutPassword
   }
 
-  async addUser(user:Users): Promise<Partial<Users>>{
+  async addUser(user:Partial<Users>): Promise<Partial<Users>>{
 
     const newUser = await this.usersRepository.save(user)
     const{password,...userWhitoutPassword}=newUser

@@ -29,10 +29,16 @@ let AuthGuard = class AuthGuard {
                 .then(payload => {
                 payload.iat = new Date(payload.iat * 1000);
                 payload.exp = new Date(payload.exp * 1000);
-                payload.roles = ["admin"];
+                return payload;
+            })
+                .then(payload => {
+                request.user = payload;
+                return true;
+            })
+                .catch(error => {
+                return false;
             });
-            request.user = payload;
-            return true;
+            return payload;
         }
         catch (error) {
             throw new common_1.UnauthorizedException("Invalid token");

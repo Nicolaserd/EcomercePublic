@@ -3,7 +3,12 @@ import { Users } from 'src/entities/users.entity';
 import { UserRepository } from 'src/users/users.repository';
 import {JwtService} from  "@nestjs/jwt";
 import * as bcrypt from "bcrypt"
+import { Role } from './roles.enum';
+import { CreateUserDto } from 'src/users/users.dto';
 
+interface UserWithConfirmation extends CreateUserDto {
+    confirmPassword?: string;
+  }
 
 
 @Injectable()
@@ -32,7 +37,8 @@ export class AuthService {
         const userPayload = {
             sub:userdb.id,
             id:userdb.id,
-            email:userdb.email
+            email:userdb.email,
+            roles:[ userdb.isAdmin?Role.Admin:Role.User]
         }
 
         const token = this.jwtService.sign(userPayload);
@@ -43,7 +49,7 @@ export class AuthService {
         
     }
 
-    async singUp(user:any){
+    async singUp(user:UserWithConfirmation){
       
         if(!user){
            
@@ -60,8 +66,8 @@ export class AuthService {
        
           const { confirmPassword, ...userData } = user;
           const {password, ...userwhitoutpassword}=userData
-          const hashedPassword = await bcrypt.hash(password,10)
-          const finalUser={
+          const hashedPassword:string = await bcrypt.hash(password,10)
+          const finalUser : Partial<Users>={
             ... userwhitoutpassword,
             password:hashedPassword,
           }

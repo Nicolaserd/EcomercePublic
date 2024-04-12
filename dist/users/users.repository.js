@@ -36,7 +36,7 @@ let UserRepository = class UserRepository {
             }
         });
         if (!user) {
-            return "user not found";
+            throw new common_1.NotFoundException('user not found');
         }
         const { password, ...userWithoutPassword } = user;
         return userWithoutPassword;

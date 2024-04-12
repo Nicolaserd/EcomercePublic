@@ -8,4 +8,5 @@ export declare class ProductRepository {
     getProducts(page: number, limit: number): Promise<Products[]>;
     getProduct(id: string): Promise<Products> | "product not found :c";
     addProducts(): Promise<string>;
+    updateProduct(id: string, product: Products): Promise<Products>;
 }

@@ -64,4 +64,11 @@ export class ProductRepository{
 
         return "products added"
     }
+
+    async updateProduct(id:string,product:Products){
+        await this.productsRepository.update(id,product);
+        const updateProduct = await this.productsRepository.findOneBy({id});
+       
+        return updateProduct
+      }
 }

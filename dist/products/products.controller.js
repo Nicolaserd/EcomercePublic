@@ -15,6 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductsController = void 0;
 const common_1 = require("@nestjs/common");
 const products_service_1 = require("./products.service");
+const products_entity_1 = require("../entities/products.entity");
+const auth_guard_1 = require("../auth/guards/auth.guard");
+const roles_decorator_1 = require("../decorators/roles.decorator");
+const roles_enum_1 = require("../auth/roles.enum");
+const roles_guard_1 = require("../auth/guards/roles.guard");
 let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
@@ -27,6 +32,9 @@ let ProductsController = class ProductsController {
     }
     getProduct(id) {
         return this.productsService.getProduct(id);
+    }
+    updateProduct(id, product) {
+        return this.productsService.updateProduct(id, product);
     }
 };
 exports.ProductsController = ProductsController;
@@ -51,6 +59,16 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "getProduct", null);
+__decorate([
+    (0, common_1.Put)(":id"),
+    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard, roles_guard_1.RolesGuard),
+    __param(0, (0, common_1.Param)("id", common_1.ParseUUIDPipe)),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, products_entity_1.Products]),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "updateProduct", null);
 exports.ProductsController = ProductsController = __decorate([
     (0, common_1.Controller)('products'),
     __metadata("design:paramtypes", [products_service_1.ProductsService])
