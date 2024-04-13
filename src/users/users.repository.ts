@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Users } from 'src/entities/users.entity';
+import { Users } from '../entities/users.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -55,7 +55,7 @@ export class UserRepository {
 
   async getUserByEmail(email: string): Promise<Partial<Users>> {
     const user = await this.usersRepository.findOneBy({ email });
-   
-    return user;
+    const {  password, isAdmin,...userWhitoutPasswordandAdmin } = user;
+    return userWhitoutPasswordandAdmin;
   }
 }

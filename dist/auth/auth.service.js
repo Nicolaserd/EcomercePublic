@@ -23,11 +23,11 @@ let AuthService = class AuthService {
     async signIn(email, password) {
         const userdb = await this.userRepository.getUserByEmail(email);
         if (!userdb) {
-            throw new common_1.BadRequestException('Invalid credentials-(uwu)-/');
+            throw new common_1.BadRequestException('Invalid credentials (uwu)');
         }
         const passwordMatch = await bcrypt.compare(password, userdb.password);
         if (!passwordMatch) {
-            throw new common_1.BadRequestException('Invalid credentials-(uwu)-/');
+            throw new common_1.BadRequestException('Invalid credentials (uwu)');
         }
         const userPayload = {
             sub: userdb.id,

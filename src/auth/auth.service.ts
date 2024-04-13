@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Users } from 'src/entities/users.entity';
-import { UserRepository } from 'src/users/users.repository';
+import { Users } from '../entities/users.entity';
+import { UserRepository } from '../users/users.repository';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { Role } from './roles.enum';
-import { CreateUserDto } from 'src/users/users.dto';
+import { CreateUserDto } from '../users/users.dto';
 
 interface UserWithConfirmation extends CreateUserDto {
   confirmPassword?: string;
@@ -20,13 +20,13 @@ export class AuthService {
   async signIn(email: string, password: string) {
     const userdb = await this.userRepository.getUserByEmail(email);
     if (!userdb) {
-      throw new BadRequestException('Invalid credentials-(uwu)-/');
+      throw new BadRequestException('Invalid credentials (uwu)');
     }
 
     const passwordMatch = await bcrypt.compare(password, userdb.password);
 
     if (!passwordMatch) {
-      throw new BadRequestException('Invalid credentials-(uwu)-/');
+      throw new BadRequestException('Invalid credentials (uwu)');
     }
 
     const userPayload = {
