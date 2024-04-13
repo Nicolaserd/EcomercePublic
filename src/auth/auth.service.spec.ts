@@ -4,12 +4,16 @@ import { UserRepository } from '../users/users.repository';
 import { JwtService } from '@nestjs/jwt';
 import { Users } from '../entities/users.entity';
 import { CreateUserDto } from 'src/users/users.dto';
+import { Role } from './roles.enum';
+import * as bcrypc from "bcrypt"
+import * as jwt from "jsonwebtoken"
 
 interface UserWithConfirmation extends CreateUserDto {
   confirmPassword?: string;
 }
 
 describe('AuthService', () => {
+  
   let service: AuthService;
   const mockUser : UserWithConfirmation={
     
@@ -24,7 +28,9 @@ describe('AuthService', () => {
       isAdmin:true
     }
 
-    let mockUserRepository : Partial<UserRepository>
+  let mockUserRepository : Partial<UserRepository>
+
+   
 
   
 
@@ -38,8 +44,18 @@ describe('AuthService', () => {
       })
 
     }
+    const mockJwtService ={
+        sign: (payload) => jwt.sign(payload, "testSecret")
+     }
     const module: TestingModule = await Test.createTestingModule({
-      providers: [AuthService,JwtService,{
+      providers: [
+        AuthService,
+        {
+          provide:JwtService,
+          useValue:mockJwtService
+        
+        },
+        {
         provide:UserRepository,
         useValue:mockUserRepository
       }],
@@ -70,7 +86,7 @@ describe('AuthService', () => {
     
   });
 
-  it('singIn() throws an eroor if password  is invalid', async() => {
+  it('singIn() throws an error if password  is invalid', async() => {
     mockUserRepository.getUserByEmail=(email: string)=> Promise.resolve(mockUser as Partial<Users>)
     try{
       await service.signIn(mockUser.email,"INVALID PASSWORD >:c")
@@ -79,7 +95,29 @@ describe('AuthService', () => {
 
       expect(error.message).toEqual('Invalid credentials (uwu)')
     }
-    
   });
+
+  it("singIn returns error if user is not found",async () =>{
+    try {
+      await service.signIn(mockUser.email,mockUser.password)
+    } catch (error) {
+      expect(error.message).toEqual("Invalid credentials")
+    }
+  });
+
+  it("singIn() return a object with a message if user is found and password is vaild",async()=>{
+    const mockUserVariant ={
+      ...mockUser,
+      password: await bcrypc.hash(mockUser.password,10)
+    };
+    mockUserRepository.getUserByEmail=(email: string)=> Promise.resolve(mockUserVariant as Partial<Users>)
+    const response = await service.signIn(mockUser.email,mockUser.password)
+    expect(response).toBeDefined()
+    expect(response.token).toBeDefined()
+    expect(response.success).toEqual("user logged in successfully")
+  })
+    
+
+  
   
 });

@@ -20,7 +20,7 @@ export class AuthService {
   async signIn(email: string, password: string) {
     const userdb = await this.userRepository.getUserByEmail(email);
     if (!userdb) {
-      throw new BadRequestException('Invalid credentials (uwu)');
+      throw new BadRequestException('Invalid credentials');
     }
 
     const passwordMatch = await bcrypt.compare(password, userdb.password);
