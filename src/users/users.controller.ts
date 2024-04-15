@@ -16,11 +16,13 @@ import { Users } from '../entities/users.entity';
 import { Roles } from '../decorators/roles.decorator';
 import { Role } from '../auth/roles.enum';
 import { RolesGuard } from '../auth/guards/roles.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags("Users")
 @Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
-
+  @ApiBearerAuth()
   @Get()
   @Roles(Role.Admin)
   @UseGuards(AuthGuard, RolesGuard)
@@ -36,17 +38,21 @@ export class UsersController {
   // addUser(@Body() user:CreateUserDto){
   //     return this.userService.addUser(user)
   // }
+  @ApiBearerAuth()
   @Put(':id')
-  @UseGuards(AuthGuard)
-  updateUser(@Param('id', ParseUUIDPipe) id: string, @Body() user: any) {
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard, RolesGuard)
+  updateUser(@Param('id', ParseUUIDPipe) id: string, @Body() user: Partial<CreateUserDto>) {
     return this.userService.updateUser(id, user);
   }
+  @ApiBearerAuth()
   @Delete(':id')
-  @UseGuards(AuthGuard)
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard, RolesGuard)
   deleteUser(@Param('id', ParseUUIDPipe) id: string) {
     return this.userService.deleteUser(id);
   }
-
+  @ApiBearerAuth()
   @Get('email/:email')
   @UseGuards(AuthGuard)
   getUserByEmail(@Param('email') email: string) {

@@ -8,5 +8,5 @@ export declare class ProductRepository {
     getProducts(page: number, limit: number): Promise<Products[]>;
     getProduct(id: string): Promise<Products>;
     addProducts(): Promise<string>;
-    updateProduct(id: string, product: Products): Promise<Products>;
+    updateProduct(id: string, product: Partial<Products>): Promise<Partial<Products>>;
 }

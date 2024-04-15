@@ -38,6 +38,9 @@ let OrdersRepository = class OrdersRepository {
         order.user = user;
         const newOrder = await this.ordersRepository.save(order);
         const productsArray = await Promise.all(products.map(async (element) => {
+            if (!element.id) {
+                throw new common_1.NotFoundException('product not found no id');
+            }
             const product = await this.productsRepository.findOneBy({
                 id: element.id,
             });

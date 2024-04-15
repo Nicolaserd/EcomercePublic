@@ -13,9 +13,20 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
+const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const users_dto_1 = require("../users/users.dto");
+const swagger_1 = require("@nestjs/swagger");
+class UserWithConfirmation extends users_dto_1.CreateUserDto {
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: "La contraseña debe tener al menos 8 caracteres y contener al menos una letra minúscula, una letra mayúscula, un número y uno de los siguientes caracteres especiales: !@#$%^&*",
+        example: "$2b$10$QKi"
+    }),
+    __metadata("design:type", String)
+], UserWithConfirmation.prototype, "confirmPassword", void 0);
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -31,6 +42,7 @@ let AuthController = class AuthController {
 exports.AuthController = AuthController;
 __decorate([
     (0, common_1.Post)('/singin'),
+    openapi.ApiResponse({ status: 201 }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [users_dto_1.LogginUserDto]),
@@ -38,12 +50,14 @@ __decorate([
 ], AuthController.prototype, "singIn", null);
 __decorate([
     (0, common_1.Post)('/signup'),
+    openapi.ApiResponse({ status: 201, type: Object }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [UserWithConfirmation]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "singUp", null);
 exports.AuthController = AuthController = __decorate([
+    (0, swagger_1.ApiTags)("Auth"),
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthController);

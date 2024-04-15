@@ -45,6 +45,7 @@ export class AuthGuard implements CanActivate {
 
         .then((payload) => {
           request.user = payload;
+          
           return true;
         })
         .catch((error) => {

@@ -64,9 +64,12 @@ let ProductRepository = class ProductRepository {
         return 'products added';
     }
     async updateProduct(id, product) {
+        const updateProductFind = await this.productsRepository.findOneBy({ id });
+        if (!updateProductFind) {
+            throw new common_1.NotFoundException('product not found :c');
+        }
         await this.productsRepository.update(id, product);
-        const updateProduct = await this.productsRepository.findOneBy({ id });
-        return updateProduct;
+        return product;
     }
 };
 exports.ProductRepository = ProductRepository;

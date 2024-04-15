@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserRepository = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const bcrypt = require("bcrypt");
 const users_entity_1 = require("../entities/users.entity");
 const typeorm_2 = require("typeorm");
 let UserRepository = class UserRepository {
@@ -47,6 +48,10 @@ let UserRepository = class UserRepository {
         return userWhitoutPasswordandAdmin;
     }
     async updateUser(id, user) {
+        if (user.password) {
+            const hashedPassword = await bcrypt.hash(user.password, 10);
+            user.password = hashedPassword;
+        }
         await this.usersRepository.update(id, user);
         const updateUser = await this.usersRepository.findOneBy({ id });
         const { password, isAdmin, ...userWhitoutPasswordandAdmin } = updateUser;
@@ -60,11 +65,7 @@ let UserRepository = class UserRepository {
     }
     async getUserByEmail(email) {
         const user = await this.usersRepository.findOneBy({ email });
-        if (!user) {
-            return null;
-        }
-        const { isAdmin, ...userWhitoutPasswordandAdmin } = user;
-        return userWhitoutPasswordandAdmin;
+        return user;
     }
 };
 exports.UserRepository = UserRepository;

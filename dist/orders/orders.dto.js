@@ -10,18 +10,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateOrderDto = void 0;
+const openapi = require("@nestjs/swagger");
+const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateOrderDto {
+    static _OPENAPI_METADATA_FACTORY() {
+        return { userId: { required: true, type: () => String }, products: { required: true, type: () => [require("../entities/products.entity").Products] } };
+    }
 }
 exports.CreateOrderDto = CreateOrderDto;
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsUUID)(),
+    (0, swagger_1.ApiProperty)({
+        description: "El ID del usuario debe ser un UUID válido",
+        example: "123e4567-e89b-12d3-a456-426614174000"
+    }),
     __metadata("design:type", String)
 ], CreateOrderDto.prototype, "userId", void 0);
 __decorate([
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.ArrayMinSize)(1),
+    (0, swagger_1.ApiProperty)({
+        description: "Lista de productos mínimo 1",
+        example: [{ "id": "b5e856fa-de12-479b-ab96-2eeb85f7bc69" }, { "id": "123e4567-e89b-12d3-a456-426614174000" }]
+    }),
     __metadata("design:type", Object)
 ], CreateOrderDto.prototype, "products", void 0);
 //# sourceMappingURL=orders.dto.js.map

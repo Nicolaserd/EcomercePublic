@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-
+import * as bcrypt from 'bcrypt';
 import { Users } from '../entities/users.entity';
 import { Repository } from 'typeorm';
 
@@ -40,7 +40,15 @@ export class UserRepository {
   }
 
   async updateUser(id: string, user: Users) {
+ 
+    if(user.password){
+      const hashedPassword: string = await bcrypt.hash(user.password, 10);
+      user.password=hashedPassword
+    }
+    
+
     await this.usersRepository.update(id, user);
+    
     const updateUser = await this.usersRepository.findOneBy({ id });
     const { password, isAdmin,...userWhitoutPasswordandAdmin  } = updateUser;
     return userWhitoutPasswordandAdmin;
@@ -55,10 +63,7 @@ export class UserRepository {
 
   async getUserByEmail(email: string): Promise<Partial<Users>> {
     const user = await this.usersRepository.findOneBy({ email });
-    if(!user){
-      return null
-    }
-    const {   isAdmin,...userWhitoutPasswordandAdmin } = user;
-    return userWhitoutPasswordandAdmin;
+        
+    return user;
   }
 }

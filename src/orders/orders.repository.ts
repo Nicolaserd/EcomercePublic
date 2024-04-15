@@ -25,6 +25,7 @@ export class OrdersRepository {
     if (!user) {
       throw new NotFoundException('user not found');
     }
+   
 
     const order = new Orders();
     order.date = new Date();
@@ -33,6 +34,10 @@ export class OrdersRepository {
     const newOrder = await this.ordersRepository.save(order);
     const productsArray = await Promise.all(
       products.map(async (element) => {
+
+        if(!element.id){
+          throw new NotFoundException('product not found no id');
+        }
         const product = await this.productsRepository.findOneBy({
           id: element.id,
         });

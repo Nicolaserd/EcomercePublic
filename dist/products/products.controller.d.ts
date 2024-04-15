@@ -6,5 +6,5 @@ export declare class ProductsController {
     addProducts(): Promise<string>;
     getProducts(page?: number, limit?: number): Promise<Products[]>;
     getProduct(id: string): Promise<Products>;
-    updateProduct(id: string, product: Products): Promise<Products>;
+    updateProduct(id: string, product: any): Promise<Partial<Products>>;
 }

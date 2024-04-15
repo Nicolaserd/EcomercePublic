@@ -1,7 +1,7 @@
 import { AuthService } from './auth.service';
 import { CreateUserDto, LogginUserDto } from '../users/users.dto';
 import { Users } from '../entities/users.entity';
-interface UserWithConfirmation extends CreateUserDto {
+declare class UserWithConfirmation extends CreateUserDto {
     confirmPassword?: string;
 }
 export declare class AuthController {

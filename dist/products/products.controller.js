@@ -13,13 +13,14 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductsController = void 0;
+const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const products_service_1 = require("./products.service");
-const products_entity_1 = require("../entities/products.entity");
 const auth_guard_1 = require("../auth/guards/auth.guard");
 const roles_decorator_1 = require("../decorators/roles.decorator");
 const roles_enum_1 = require("../auth/roles.enum");
 const roles_guard_1 = require("../auth/guards/roles.guard");
+const swagger_1 = require("@nestjs/swagger");
 let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
@@ -40,12 +41,14 @@ let ProductsController = class ProductsController {
 exports.ProductsController = ProductsController;
 __decorate([
     (0, common_1.Get)('seeder'),
+    openapi.ApiResponse({ status: 200, type: String }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "addProducts", null);
 __decorate([
     (0, common_1.Get)(),
+    openapi.ApiResponse({ status: 200, type: [require("../entities/products.entity").Products] }),
     __param(0, (0, common_1.Query)('page')),
     __param(1, (0, common_1.Query)('limit')),
     __metadata("design:type", Function),
@@ -54,22 +57,26 @@ __decorate([
 ], ProductsController.prototype, "getProducts", null);
 __decorate([
     (0, common_1.Get)(':id'),
+    openapi.ApiResponse({ status: 200, type: require("../entities/products.entity").Products }),
     __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "getProduct", null);
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.Put)(':id'),
     (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard, roles_guard_1.RolesGuard),
+    openapi.ApiResponse({ status: 200, type: Object }),
     __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, products_entity_1.Products]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "updateProduct", null);
 exports.ProductsController = ProductsController = __decorate([
+    (0, swagger_1.ApiTags)("Products"),
     (0, common_1.Controller)('products'),
     __metadata("design:paramtypes", [products_service_1.ProductsService])
 ], ProductsController);

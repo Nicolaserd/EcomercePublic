@@ -13,10 +13,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileUploadController = void 0;
+const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const platform_express_1 = require("@nestjs/platform-express");
 const file_upload_service_1 = require("./file-upload.service");
 const auth_guard_1 = require("../auth/guards/auth.guard");
+const swagger_1 = require("@nestjs/swagger");
 let FileUploadController = class FileUploadController {
     constructor(FileUploadService) {
         this.FileUploadService = FileUploadService;
@@ -30,6 +32,7 @@ __decorate([
     (0, common_1.Post)('uploadImage/:id'),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    openapi.ApiResponse({ status: 201, type: require("../entities/products.entity").Products }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.UploadedFile)(new common_1.ParseFilePipe({
         validators: [
@@ -47,6 +50,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], FileUploadController.prototype, "uploadImage", null);
 exports.FileUploadController = FileUploadController = __decorate([
+    (0, swagger_1.ApiTags)("Files"),
     (0, common_1.Controller)('files'),
     __metadata("design:paramtypes", [file_upload_service_1.FileUploadService])
 ], FileUploadController);
