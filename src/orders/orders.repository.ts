@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { OrderDetails } from 'src/entities/orderdetails.entity';
-import { Orders } from 'src/entities/orders.entity';
-import { Products } from 'src/entities/products.entity';
-import { Users } from 'src/entities/users.entity';
+import { OrderDetails } from '../entities/orderdetails.entity';
+import { Orders } from '../entities/orders.entity';
+import { Products } from '../entities/products.entity';
+import { Users } from '../entities/users.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class OrdersRepository {
     private productsRepository: Repository<Products>,
   ) {}
 
-  async addOrder(userId: string, products: any) {
+  async addOrder(userId: string, products: Partial <Products[]>) {
     let total = 0;
     const user = await this.userRepository.findOneBy({ id: userId });
     if (!user) {

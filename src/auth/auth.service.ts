@@ -45,7 +45,9 @@ export class AuthService {
     if (!user) {
       throw new BadRequestException('Invalid user');
     }
+    
     const userdb = await this.userRepository.getUserByEmail(user.email);
+    
     if (userdb) {
       throw new BadRequestException('Email already exist in DB');
     }

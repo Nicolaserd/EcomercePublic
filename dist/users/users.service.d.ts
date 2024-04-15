@@ -1,5 +1,5 @@
 import { UserRepository } from './users.repository';
-import { Users } from 'src/entities/users.entity';
+import { Users } from '../entities/users.entity';
 export declare class UsersService {
     private readonly usersRepository;
     constructor(usersRepository: UserRepository);

@@ -10,12 +10,12 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { AuthGuard } from '../auth/guards/auth.guard';
 import { CreateUserDto } from './users.dto';
-import { Users } from 'src/entities/users.entity';
-import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from 'src/auth/roles.enum';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Users } from '../entities/users.entity';
+import { Roles } from '../decorators/roles.decorator';
+import { Role } from '../auth/roles.enum';
+import { RolesGuard } from '../auth/guards/roles.guard';
 
 @Controller('users')
 export class UsersController {

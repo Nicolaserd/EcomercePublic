@@ -1,7 +1,7 @@
-import { OrderDetails } from 'src/entities/orderdetails.entity';
-import { Orders } from 'src/entities/orders.entity';
-import { Products } from 'src/entities/products.entity';
-import { Users } from 'src/entities/users.entity';
+import { OrderDetails } from '../entities/orderdetails.entity';
+import { Orders } from '../entities/orders.entity';
+import { Products } from '../entities/products.entity';
+import { Users } from '../entities/users.entity';
 import { Repository } from 'typeorm';
 export declare class OrdersRepository {
     private ordersRepository;
@@ -9,6 +9,6 @@ export declare class OrdersRepository {
     private userRepository;
     private productsRepository;
     constructor(ordersRepository: Repository<Orders>, ordersDetailsRepository: Repository<OrderDetails>, userRepository: Repository<Users>, productsRepository: Repository<Products>);
-    addOrder(userId: string, products: any): Promise<Orders[]>;
+    addOrder(userId: string, products: Partial<Products[]>): Promise<Orders[]>;
     getOrder(id: string): Promise<Orders>;
 }

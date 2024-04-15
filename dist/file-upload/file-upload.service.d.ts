@@ -1,6 +1,6 @@
 /// <reference types="multer" />
 import { FileUploadRepository } from './file-upload.repository';
-import { Products } from 'src/entities/products.entity';
+import { Products } from '../entities/products.entity';
 import { Repository } from 'typeorm';
 export declare class FileUploadService {
     private readonly fileUploadRepository;

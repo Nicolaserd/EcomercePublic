@@ -55,7 +55,10 @@ export class UserRepository {
 
   async getUserByEmail(email: string): Promise<Partial<Users>> {
     const user = await this.usersRepository.findOneBy({ email });
-    const {  password, isAdmin,...userWhitoutPasswordandAdmin } = user;
+    if(!user){
+      return null
+    }
+    const {   isAdmin,...userWhitoutPasswordandAdmin } = user;
     return userWhitoutPasswordandAdmin;
   }
 }

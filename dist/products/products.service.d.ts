@@ -1,5 +1,5 @@
 import { ProductRepository } from './products.repository';
-import { Products } from 'src/entities/products.entity';
+import { Products } from '../entities/products.entity';
 export declare class ProductsService {
     private readonly productsRepository;
     constructor(productsRepository: ProductRepository);

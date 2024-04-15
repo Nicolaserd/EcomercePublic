@@ -9,11 +9,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { Products } from 'src/entities/products.entity';
-import { AuthGuard } from 'src/auth/guards/auth.guard';
-import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from 'src/auth/roles.enum';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Products } from '../entities/products.entity';
+import { AuthGuard } from '../auth/guards/auth.guard';
+import { Roles } from '../decorators/roles.decorator';
+import { Role } from '../auth/roles.enum';
+import { RolesGuard } from '../auth/guards/roles.guard';
 
 @Controller('products')
 export class ProductsController {

@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateUserDto, LogginUserDto } from 'src/users/users.dto';
-import { Users } from 'src/entities/users.entity';
+import { CreateUserDto, LogginUserDto } from '../users/users.dto';
+import { Users } from '../entities/users.entity';
 
 interface UserWithConfirmation extends CreateUserDto {
   confirmPassword?: string;
