@@ -27,6 +27,6 @@ jobs:
         context: .
         files: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }} /nest-demo:latests
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/nest-demo:latest
         
         
