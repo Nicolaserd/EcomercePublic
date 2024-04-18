@@ -6,7 +6,8 @@ import * as bcrypt from 'bcrypt';
 import { Role } from './roles.enum';
 import { CreateUserDto } from '../users/users.dto';
 
-interface UserWithConfirmation extends CreateUserDto {
+class UserWithConfirmation extends CreateUserDto {
+ 
   confirmPassword?: string;
 }
 

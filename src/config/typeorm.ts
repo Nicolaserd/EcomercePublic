@@ -1,4 +1,4 @@
-//! Archivo de configuración casi siempre es un coy paste ( la estructura ba ahacer la misma )
+//! Archivo de configuración casi siempre es un coy paste ( la estructura va ser la misma )
 
 import { registerAs } from '@nestjs/config';
 import { config as dotenvConfig } from 'dotenv';
@@ -6,7 +6,7 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 dotenvConfig({ path: '.env' });
 const config = {
   type: 'postgres',
-  host: `${process.env.DB_HOST}` || 'postgresdb',
+  host:  'postgresdb', //`${process.env.DB_HOST}` ||
   port: `${process.env.DB_PORT}` || 5432,
   username: `${process.env.DB_USER}`,
   password: `${process.env.DB_PASSWORD}`,

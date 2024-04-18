@@ -26,7 +26,7 @@ export class CreateUserDto {
   @IsEmail({}, { message: 'El correo electrónico debe ser válido' })
   @ApiProperty({
     description:"El correo electrónico debe ser válido",
-    example: "correo@example.com"
+    example: "juan@example.com"
   })
   email: string;
 
@@ -42,7 +42,7 @@ export class CreateUserDto {
   )
   @ApiProperty({
     description:"La contraseña debe tener al menos 8 caracteres y contener al menos una letra minúscula, una letra mayúscula, un número y uno de los siguientes caracteres especiales: !@#$%^&*",
-    example:"$2b$10$QKi"
+    example:"Password123!"
   })
   password: string;
 
