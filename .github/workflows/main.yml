@@ -6,7 +6,7 @@ on:
       - "main"
 jobs:
   build:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
     -
       name: Checkout
@@ -21,10 +21,10 @@ jobs:
       name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
     -
-      nanme: Build and push
+      name: Build and push
       uses: docker/build-push-action@v5
       with:
-        context:
+        context: .
         files: ./Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }} /nest-demo:latests
