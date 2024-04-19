@@ -12,7 +12,7 @@ import {
 import { UsersService } from './users.service';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { CreateUserDto } from './users.dto';
-import { Users } from '../entities/users.entity';
+
 import { Roles } from '../decorators/roles.decorator';
 import { Role } from '../auth/roles.enum';
 import { RolesGuard } from '../auth/guards/roles.guard';

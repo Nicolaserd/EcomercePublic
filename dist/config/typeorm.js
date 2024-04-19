@@ -7,7 +7,7 @@ const typeorm_1 = require("typeorm");
 (0, dotenv_1.config)({ path: '.env' });
 const config = {
     type: 'postgres',
-    host: 'postgresdb',
+    host: `${process.env.DB_HOST}`,
     port: `${process.env.DB_PORT}` || 5432,
     username: `${process.env.DB_USER}`,
     password: `${process.env.DB_PASSWORD}`,
@@ -16,6 +16,9 @@ const config = {
     migrations: ['dist/migrations/*{.ts,.js}'],
     autoLoadEntities: true,
     synchronize: true,
+    ssl: {
+        rejectUnauthorized: false,
+    },
 };
 exports.default = (0, config_1.registerAs)('typeorm', () => config);
 exports.connectionSource = new typeorm_1.DataSource(config);

@@ -14,8 +14,11 @@ const config = {
   entities: ['dist/**/*.entity{.ts,.js}'],
   migrations: ['dist/migrations/*{.ts,.js}'],
   autoLoadEntities: true,
-  // synchronize: true,
+  synchronize: true,
   // dropSchema: true,
+  ssl: {
+    rejectUnauthorized: false, // Esto puede ser necesario si estás usando certificados autofirmados o no confiables
+  },
 
 };
 export default registerAs('typeorm', () => config);
