@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseUUIDPipe,
@@ -51,10 +52,20 @@ export class ProductsController {
   }
 
   
+  @ApiBearerAuth() 
   @Post()
   @Roles(Role.Admin)
-  @UseGuards(AuthGuard, RolesGuard)  
+  @UseGuards(AuthGuard, RolesGuard)
   addProduct(@Body() product: CreateProductDto){
     return this.productsService.addProduct(product)
   }
+
+  @ApiBearerAuth()
+  @Delete(':id')
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard, RolesGuard)
+  deleteProduct(@Param('id', ParseUUIDPipe) id: string) {
+    return this.productsService.deleteProduct(id);
+  }
 }
+

@@ -23,4 +23,7 @@ export class ProductsService {
   addProduct(product:CreateProductDto){
     return this.productsRepository.addProduct(product)
   }
+  deleteProduct(id:string){
+    return this.productsRepository.deleteProduct(id)
+  }
 }

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Categories } from '../entities/categories.entity';
 import { Products } from '../entities/products.entity';
@@ -94,5 +94,16 @@ export class ProductRepository {
     return  await this.productsRepository.save(productadd)
 
 
+  }
+
+  async deleteProduct (id:string){
+    try {
+      const delProduct = await this.productsRepository.delete(id)
+      return delProduct
+    } catch (error) {
+      throw new InternalServerErrorException("Error al eliminar el producto:", error)
+    }
+
+    
   }
 }
