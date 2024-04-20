@@ -1,73 +1,105 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# README  📝
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este repositorio contiene el código fuente de una aplicación Node.js utilizando NestJS como framework. La aplicación cuenta con diferentes módulos y funcionalidades, las cuales se describen a continuación.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Estructura del proyecto
 
-## Description
+El proyecto sigue la estructura de directorios recomendada por NestJS. A continuación, se presenta un resumen de los directorios más importantes:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Estructura del proyecto:
+  - `auth`: Maneja los servicios de signin y signup.
+  - `file-upload`: Se usa Cloudinary para la carga de archivos y generar un URL.
+  - `users`: Controla la lógica de usuarios, protege rutas según la autenticación, y utiliza DTO.
+  - `decorators`: Es un decorador personalizado donde se define el rol del usuario (admin o user).
+  - `middlewares`: Se utiliza un middleware global para indicar la ruta, fecha y hora.
+  - `products`: Controla la lógica de los productos y protege las rutas según la autenticación.
+  - `orders`: Controla la lógica de las órdenes que realizan los usuarios, protege las rutas según la autenticación y utiliza DTO.
+  - `categories`: Agrega categorías de productos.
+ 
 
-## Installation
+## Módulos y funcionalidades
 
-```bash
-$ npm install
-```
+### Autenticación y autorización
 
-## Running the app
+El módulo `auth` se encarga de la autenticación y autorización de usuarios. Incluye los siguientes archivos:
 
-```bash
-# development
-$ npm run start
+- `auth.controller.ts`: Controlador para manejar rutas relacionadas con la autenticación.
+- `auth.guard.ts`: Guardia de autenticación para proteger rutas.
+- `auth.service.ts`: Servicio para manejar la lógica de autenticación.
+- `roles.enum.ts`: Enumeración de roles de usuario.
 
-# watch mode
-$ npm run start:dev
+### Carga de archivos
 
-# production mode
-$ npm run start:prod
-```
+El módulo `file-upload` permite cargar archivos en la aplicación. Incluye los siguientes archivos:
 
-## Test
+- `file-upload.controller.ts`: Controlador para manejar rutas relacionadas con la carga de archivos.
+- `file-upload.module.ts`: Módulo que configura el servicio de carga de archivos.
+- `file-upload.service.ts`: Servicio para manejar la lógica de carga de archivos.
+- `file-upload.repository.ts`: Repositorio para almacenar información de los archivos cargados.
 
-```bash
-# unit tests
-$ npm run test
+### Usuarios
 
-# e2e tests
-$ npm run test:e2e
+El módulo `users` gestiona los usuarios de la aplicación. Incluye los siguientes archivos:
 
-# test coverage
-$ npm run test:cov
-```
+- `users.controller.ts`: Controlador para manejar rutas relacionadas con los usuarios.
+- `users.dto.ts`: Objetos de transferencia de datos (DTO) para definir las entradas y salidas de datos.
+- `users.module.ts`: Módulo que configura el servicio de usuarios.
+- `users.repository.ts`: Repositorio para almacenar y recuperar información de los usuarios.
+- `users.service.ts`: Servicio para manejar la lógica de los usuarios.
 
-## Support
+### Productos
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+El módulo `products` gestiona los productos de la aplicación. Incluye los siguientes archivos:
 
-## Stay in touch
+- `products.controller.ts`: Controlador para manejar rutas relacionadas con los productos.
+- `products.dto.ts`: Objetos de transferencia de datos (DTO) para definir las entradas y salidas de datos.
+- `products.module.ts`: Módulo que configura el servicio de productos.
+- `products.repository.ts`: Repositorio para almacenar y recuperar información de los productos.
+- `products.service.ts`: Servicio para manejar la lógica de los productos.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Ordenes
 
-## License
+El módulo `orders` gestiona los ordenes de la aplicación. Incluye los siguientes archivos:
 
-Nest is [MIT licensed](LICENSE).
+- `orders.controller.ts`: Controlador para manejar rutas relacionadas con los Ordenes.
+- `orders.dto.ts`: Objetos de transferencia de datos (DTO) para definir las entradas y salidas de datos.
+- `orders.module.ts`: Módulo que configura el servicio de Ordenes.
+- `orders.repository.ts`: Repositorio para almacenar y recuperar información de los Ordenes.
+- `orders.service.ts`: Servicio para manejar la lógica de los Ordenes.
+
+
+## Endpoints
+
+#### Autenticación
+
+- POST /auth/login: Realiza el inicio de sesión de un usuario.
+- POST /auth/register: Registra un nuevo usuario.
+
+#### Usuarios
+
+- GET /users: Obtiene una lista de usuarios.
+- GET /users/:id: Obtiene un usuario específico por su ID.
+- PUT /users/:id: Actualiza un usuario específico por su ID.
+- DELETE /users/:id: Elimina un usuario específico por su ID.
+
+#### Productos
+
+- GET /products: Obtiene una lista de productos.
+- GET /products/:id: Obtiene un producto específico por su ID.
+- POST /products: Crea un nuevo producto.
+- PUT /products/:id: Actualiza un producto específico por su ID.
+- DELETE /products/:id: Elimina un producto específico por su ID.
+
+#### Órdenes
+
+- GET /orders: Obtiene una lista de órdenes.
+- GET /orders/:id: Obtiene una orden específica por su ID.
+- POST /orders: Crea una nueva orden.
+- PUT /orders/:id: Actualiza una orden específica por su ID.
+- DELETE /orders/:id: Elimina una orden específica por su ID.
+
+## Configuración adicional
+
+El proyecto también incluye archivos de configuración adicionales en el directorio `config` (typeorm y cloudinary) y archivos de entidades en el directorio `entities`. Además, se utilizan decoradores personalizados para extender las capacidades de NestJS.
+
+Para obtener más información sobre la configuración y el uso de estos archivos, consulte la [documentación oficial de NestJS](https://docs.nestjs.com/).
