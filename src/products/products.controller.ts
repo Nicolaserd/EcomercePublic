@@ -52,6 +52,8 @@ export class ProductsController {
 
   
   @Post()
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard, RolesGuard)  
   addProduct(@Body() product: CreateProductDto){
     return this.productsService.addProduct(product)
   }
