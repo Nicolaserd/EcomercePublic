@@ -84,6 +84,7 @@ export class CreateUserDto {
   city: string;
 
   @IsEmpty()
+  @IsNotEmpty({ message: 'el admin es obligatorio' })
   @ApiProperty({
     description:"Indica si el usuario es administrador",
     example: false

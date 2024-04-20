@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Post,
   Put,
   Query,
   UseGuards,
@@ -15,6 +16,7 @@ import { Roles } from '../decorators/roles.decorator';
 import { Role } from '../auth/roles.enum';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { CreateProductDto } from './products.dto';
 
 @ApiTags("Products")
 @Controller('products')
@@ -43,8 +45,14 @@ export class ProductsController {
   @UseGuards(AuthGuard, RolesGuard)
   updateProduct(
     @Param('id', ParseUUIDPipe) id: string,
-    @Body() product: any,
+    @Body() product:CreateProductDto,
   ) {
     return this.productsService.updateProduct(id, product);
+  }
+
+  
+  @Post()
+  addProduct(@Body() product: CreateProductDto){
+    return this.productsService.addProduct(product)
   }
 }

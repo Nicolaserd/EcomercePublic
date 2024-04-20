@@ -1,9 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Categories } from '../entities/categories.entity';
 import { Products } from '../entities/products.entity';
 import { Repository } from 'typeorm';
 import * as data from '../data.json';
+import { CreateProductDto } from './products.dto';
 
 @Injectable()
 export class ProductRepository {
@@ -70,5 +71,28 @@ export class ProductRepository {
     }
     await this.productsRepository.update(id, product);
     return product;
+  }
+
+  async addProduct(product:CreateProductDto): Promise <Partial<Products>>{
+
+    const foundProduct = await this.productsRepository.findOne({where:{name:product.name}})
+
+    if(foundProduct){
+      throw new BadRequestException(`A product with the name '${product.name}' already exists.`)
+    }
+    console.log(product.categoryId)
+    const categoryProduct = await this.categoriesRepository.findOne({where:{id:product.categoryId}})
+
+    if(!categoryProduct){
+      throw new NotFoundException('category not found :c');
+    }
+
+    const productadd = this.productsRepository.create(product);
+
+    productadd.category = categoryProduct
+
+    return  await this.productsRepository.save(productadd)
+
+
   }
 }
