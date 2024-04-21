@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Users } from '../entities/users.entity';
 import { UserRepository } from '../users/users.repository';
 import { JwtService } from '@nestjs/jwt';
@@ -68,4 +68,47 @@ export class AuthService {
 
     return userWithoutPassword;
   }
+
+  async Auth0(req:any){
+
+    if(!req){
+     throw new InternalServerErrorException("lost data")
+ 
+    }
+    const user = {
+      name:`${req.given_name} ${req.family_name}`,
+      email: `${req.email}`,
+      password: `${req.sub}`,
+      phone:null,
+      address: `No data`,
+      city: `No data`,
+ 
+     }
+     const userdb = await this.userRepository.getUserByEmail(user.email);
+     
+     if (userdb) {
+       try {
+        return await this.signIn(user.email,user.password)
+       } catch (error) {
+ 
+   
+       }
+       
+     }
+ 
+     const { password, ...userwhitoutpassword } = user;
+     const hashedPassword: string = await bcrypt.hash(password, 10);
+     const finalUser: Partial<Users> = {
+       ...userwhitoutpassword,
+       password: hashedPassword,
+     };
+     await this.userRepository.addUser(finalUser);
+     const userReturn ={
+       email: req.email,
+       password:req.sub
+     }
+     return { success: 'user sing Up successfully', userReturn }
+ 
+ 
+   }
 }

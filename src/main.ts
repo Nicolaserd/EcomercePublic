@@ -3,9 +3,12 @@ import { AppModule } from './app.module';
 import { loggerGlobal } from './middlewares/logger.middleware';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { auth } from 'express-openid-connect';
+import {config as auth0Config} from "./config/auth0.cofig"
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.use(auth(auth0Config))
   app.enableCors();
   app.use(loggerGlobal);
   app.useGlobalPipes(new ValidationPipe());
