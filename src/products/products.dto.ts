@@ -44,11 +44,11 @@ export class CreateProductDto {
   })
   imgUrl?: string;
 
-  @IsNotEmpty({ message: 'El ID de la categoría es obligatorio' })
+  @IsOptional()
   @IsUUID("4", { message: 'El ID de la categoría debe ser un UUID válido' })
   @ApiProperty({
     description: "El ID de la categoría del producto",
     example: "1e2de1cf-204f-4913-8846-763c5ab6a6fc"
   })
-  categoryId: string;
+  categoryId?: string;
 }
