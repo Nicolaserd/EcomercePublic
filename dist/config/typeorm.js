@@ -7,7 +7,7 @@ const typeorm_1 = require("typeorm");
 (0, dotenv_1.config)({ path: '.env' });
 const config = {
     type: 'postgres',
-    host: `${process.env.DB_HOST}`,
+    url: "postgres://postgresdb:E2xB4fUH7Npqmxu5pRVZerrIt9dtHemt@dpg-cogtbhuv3ddc73fctq80-a.oregon-postgres.render.com/ecomerce_arht",
     port: `${process.env.DB_PORT}` || 5432,
     username: `${process.env.DB_USER}`,
     password: `${process.env.DB_PASSWORD}`,
