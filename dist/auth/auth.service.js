@@ -62,6 +62,39 @@ let AuthService = class AuthService {
         const userWithoutPassword = await this.userRepository.addUser(finalUser);
         return userWithoutPassword;
     }
+    async Auth0(req) {
+        if (!req) {
+            throw new common_1.InternalServerErrorException("lost data");
+        }
+        const user = {
+            name: `${req.given_name} ${req.family_name}`,
+            email: `${req.email}`,
+            password: `${req.sub}`,
+            phone: null,
+            address: `No data`,
+            city: `No data`,
+        };
+        const userdb = await this.userRepository.getUserByEmail(user.email);
+        if (userdb) {
+            try {
+                return await this.signIn(user.email, user.password);
+            }
+            catch (error) {
+            }
+        }
+        const { password, ...userwhitoutpassword } = user;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const finalUser = {
+            ...userwhitoutpassword,
+            password: hashedPassword,
+        };
+        await this.userRepository.addUser(finalUser);
+        const userReturn = {
+            email: req.email,
+            password: req.sub
+        };
+        return { success: 'user sing Up successfully', userReturn };
+    }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([

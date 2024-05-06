@@ -28,6 +28,12 @@ let ProductsService = class ProductsService {
     updateProduct(id, product) {
         return this.productsRepository.updateProduct(id, product);
     }
+    addProduct(product) {
+        return this.productsRepository.addProduct(product);
+    }
+    deleteProduct(id) {
+        return this.productsRepository.deleteProduct(id);
+    }
 };
 exports.ProductsService = ProductsService;
 exports.ProductsService = ProductsService = __decorate([

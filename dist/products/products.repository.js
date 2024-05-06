@@ -71,6 +71,29 @@ let ProductRepository = class ProductRepository {
         await this.productsRepository.update(id, product);
         return product;
     }
+    async addProduct(product) {
+        const foundProduct = await this.productsRepository.findOne({ where: { name: product.name } });
+        if (foundProduct) {
+            throw new common_1.BadRequestException(`A product with the name '${product.name}' already exists.`);
+        }
+        console.log(product.categoryId);
+        const categoryProduct = await this.categoriesRepository.findOne({ where: { id: product.categoryId } });
+        if (!categoryProduct) {
+            throw new common_1.NotFoundException('category not found :c');
+        }
+        const productadd = this.productsRepository.create(product);
+        productadd.category = categoryProduct;
+        return await this.productsRepository.save(productadd);
+    }
+    async deleteProduct(id) {
+        try {
+            const delProduct = await this.productsRepository.delete(id);
+            return delProduct;
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException("Error al eliminar el producto:", error);
+        }
+    }
 };
 exports.ProductRepository = ProductRepository;
 exports.ProductRepository = ProductRepository = __decorate([

@@ -5,8 +5,11 @@ const app_module_1 = require("./app.module");
 const logger_middleware_1 = require("./middlewares/logger.middleware");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
+const express_openid_connect_1 = require("express-openid-connect");
+const auth0_cofig_1 = require("./config/auth0.cofig");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    app.use((0, express_openid_connect_1.auth)(auth0_cofig_1.config));
     app.enableCors();
     app.use(logger_middleware_1.loggerGlobal);
     app.useGlobalPipes(new common_1.ValidationPipe());

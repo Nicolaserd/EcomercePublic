@@ -14,5 +14,15 @@ export declare class AuthService {
         token: string;
     }>;
     singUp(user: UserWithConfirmation): Promise<Partial<Users>>;
+    Auth0(req: any): Promise<{
+        success: string;
+        token: string;
+    } | {
+        success: string;
+        userReturn: {
+            email: any;
+            password: any;
+        };
+    }>;
 }
 export {};

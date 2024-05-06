@@ -76,7 +76,7 @@ __decorate([
     __metadata("design:type", String)
 ], Users.prototype, "city", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ default: false }),
     __metadata("design:type", Boolean)
 ], Users.prototype, "isAdmin", void 0);
 __decorate([

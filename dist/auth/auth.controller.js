@@ -38,6 +38,9 @@ let AuthController = class AuthController {
     singUp(user) {
         return this.authService.singUp(user);
     }
+    getAuth0Protected(req) {
+        return this.authService.Auth0(req?.oidc?.user);
+    }
 };
 exports.AuthController = AuthController;
 __decorate([
@@ -56,6 +59,14 @@ __decorate([
     __metadata("design:paramtypes", [UserWithConfirmation]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "singUp", null);
+__decorate([
+    (0, common_1.Get)("/Auth0/protected"),
+    openapi.ApiResponse({ status: 200, type: Object }),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "getAuth0Protected", null);
 exports.AuthController = AuthController = __decorate([
     (0, swagger_1.ApiTags)("Auth"),
     (0, common_1.Controller)('auth'),

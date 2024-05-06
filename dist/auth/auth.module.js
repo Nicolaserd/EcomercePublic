@@ -13,7 +13,11 @@ const auth_service_1 = require("./auth.service");
 const users_repository_1 = require("../users/users.repository");
 const typeorm_1 = require("@nestjs/typeorm");
 const users_entity_1 = require("../entities/users.entity");
+const express_openid_connect_1 = require("express-openid-connect");
 let AuthModule = class AuthModule {
+    configure(consumer) {
+        consumer.apply((0, express_openid_connect_1.requiresAuth)()).forRoutes('Auth/Auth0/protected');
+    }
 };
 exports.AuthModule = AuthModule;
 exports.AuthModule = AuthModule = __decorate([

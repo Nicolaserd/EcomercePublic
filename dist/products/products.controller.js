@@ -21,6 +21,7 @@ const roles_decorator_1 = require("../decorators/roles.decorator");
 const roles_enum_1 = require("../auth/roles.enum");
 const roles_guard_1 = require("../auth/guards/roles.guard");
 const swagger_1 = require("@nestjs/swagger");
+const products_dto_1 = require("./products.dto");
 let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
@@ -36,6 +37,12 @@ let ProductsController = class ProductsController {
     }
     updateProduct(id, product) {
         return this.productsService.updateProduct(id, product);
+    }
+    addProduct(product) {
+        return this.productsService.addProduct(product);
+    }
+    deleteProduct(id) {
+        return this.productsService.deleteProduct(id);
     }
 };
 exports.ProductsController = ProductsController;
@@ -72,9 +79,31 @@ __decorate([
     __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String, products_dto_1.CreateProductDto]),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "updateProduct", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.Post)(),
+    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard, roles_guard_1.RolesGuard),
+    openapi.ApiResponse({ status: 201, type: Object }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [products_dto_1.CreateProductDto]),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "addProduct", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.Delete)(':id'),
+    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard, roles_guard_1.RolesGuard),
+    openapi.ApiResponse({ status: 200 }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "deleteProduct", null);
 exports.ProductsController = ProductsController = __decorate([
     (0, swagger_1.ApiTags)("Products"),
     (0, common_1.Controller)('products'),

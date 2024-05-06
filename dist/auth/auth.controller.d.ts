@@ -1,6 +1,10 @@
 import { AuthService } from './auth.service';
 import { CreateUserDto, LogginUserDto } from '../users/users.dto';
-import { Users } from '../entities/users.entity';
+interface CustomRequest extends Request {
+    oidc?: {
+        user: any;
+    };
+}
 declare class UserWithConfirmation extends CreateUserDto {
     confirmPassword?: string;
 }
@@ -11,6 +15,16 @@ export declare class AuthController {
         success: string;
         token: string;
     }>;
-    singUp(user: UserWithConfirmation): Promise<Partial<Users>>;
+    singUp(user: UserWithConfirmation): Promise<Partial<import("src/entities/users.entity").Users>>;
+    getAuth0Protected(req: CustomRequest): Promise<{
+        success: string;
+        token: string;
+    } | {
+        success: string;
+        userReturn: {
+            email: any;
+            password: any;
+        };
+    }>;
 }
 export {};

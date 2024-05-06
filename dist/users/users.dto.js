@@ -94,6 +94,7 @@ __decorate([
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "city", void 0);
 __decorate([
+    (0, class_validator_1.IsEmpty)(),
     (0, class_validator_1.IsNotEmpty)({ message: 'el admin es obligatorio' }),
     (0, swagger_1.ApiProperty)({
         description: "Indica si el usuario es administrador",
