@@ -72,34 +72,39 @@ El módulo `orders` gestiona los ordenes de la aplicación. Incluye los siguient
 
 #### Autenticación
 
-- POST /auth/login: Realiza el inicio de sesión de un usuario.
-- POST /auth/register: Registra un nuevo usuario.
+- POST https://ecomerce-public.vercel.app/auth/login: Realiza el inicio de sesión de un usuario.
+- POST https://ecomerce-public.vercel.app/auth/register: Registra un nuevo usuario.
 
 #### Usuarios
 
-- GET /users: Obtiene una lista de usuarios.
-- GET /users/:id: Obtiene un usuario específico por su ID.
-- PUT /users/:id: Actualiza un usuario específico por su ID.
-- DELETE /users/:id: Elimina un usuario específico por su ID.
+- GET https://ecomerce-public.vercel.app/users: Obtiene una lista de usuarios.
+- GET https://ecomerce-public.vercel.app/users/:id: Obtiene un usuario específico por su ID.
+- PUT https://ecomerce-public.vercel.app/users/:id: Actualiza un usuario específico por su ID.
+- DELETE https://ecomerce-public.vercel.app/users/:id: Elimina un usuario específico por su ID.
 
 #### Productos
 
-- GET /products: Obtiene una lista de productos.
-- GET /products/:id: Obtiene un producto específico por su ID.
-- POST /products: Crea un nuevo producto.
-- PUT /products/:id: Actualiza un producto específico por su ID.
-- DELETE /products/:id: Elimina un producto específico por su ID.
+- GET https://ecomerce-public.vercel.app/products: Obtiene una lista de productos.
+- GET https://ecomerce-public.vercel.app/products/:id: Obtiene un producto específico por su ID.
+- POST https://ecomerce-public.vercel.app/products: Crea un nuevo producto.
+- PUT https://ecomerce-public.vercel.app/products/:id: Actualiza un producto específico por su ID.
+- DELETE https://ecomerce-public.vercel.app/products/:id: Elimina un producto específico por su ID.
 
 #### Órdenes
 
-- GET /orders: Obtiene una lista de órdenes.
-- GET /orders/:id: Obtiene una orden específica por su ID.
-- POST /orders: Crea una nueva orden.
-- PUT /orders/:id: Actualiza una orden específica por su ID.
-- DELETE /orders/:id: Elimina una orden específica por su ID.
+- GET https://ecomerce-public.vercel.app/orders: Obtiene una lista de órdenes.
+- GET https://ecomerce-public.vercel.app/orders/:id: Obtiene una orden específica por su ID.
+- POST https://ecomerce-public.vercel.app/orders: Crea una nueva orden.
+- PUT https://ecomerce-public.vercel.app/orders/:id: Actualiza una orden específica por su ID.
+- DELETE https://ecomerce-public.vercel.app/orders/:id: Elimina una orden específica por su ID.
 
 ## Configuración adicional
 
 El proyecto también incluye archivos de configuración adicionales en el directorio `config` (typeorm y cloudinary) y archivos de entidades en el directorio `entities`. Además, se utilizan decoradores personalizados para extender las capacidades de NestJS.
 
 Para obtener más información sobre la configuración y el uso de estos archivos, consulte la [documentación oficial de NestJS](https://docs.nestjs.com/).
+
+## Información de Contacto
+
+- **Teléfono:** +573057139607
+- **Correo Electrónico:** [530nicolas@gmail.com](mailto:530nicolas@gmail.com)
