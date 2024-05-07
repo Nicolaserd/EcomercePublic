@@ -2,10 +2,6 @@ import { DataSource } from 'typeorm';
 declare const _default: (() => {
     type: string;
     url: string;
-    port: string | number;
-    username: string;
-    password: string;
-    database: string;
     entities: string[];
     migrations: string[];
     autoLoadEntities: boolean;
@@ -16,10 +12,6 @@ declare const _default: (() => {
 }) & import("@nestjs/config").ConfigFactoryKeyHost<{
     type: string;
     url: string;
-    port: string | number;
-    username: string;
-    password: string;
-    database: string;
     entities: string[];
     migrations: string[];
     autoLoadEntities: boolean;

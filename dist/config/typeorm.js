@@ -8,10 +8,6 @@ const typeorm_1 = require("typeorm");
 const config = {
     type: 'postgres',
     url: `${process.env.DB_URL}`,
-    port: `${process.env.DB_PORT}` || 5432,
-    username: `${process.env.DB_USER}`,
-    password: `${process.env.DB_PASSWORD}`,
-    database: `${process.env.DB_NAME}`,
     entities: ['dist/**/*.entity{.ts,.js}'],
     migrations: ['dist/migrations/*{.ts,.js}'],
     autoLoadEntities: true,
