@@ -1,0 +1,192 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README</title>
+    <style>
+       body {
+    background-color: #2b2b2b;
+    color: #dcdcdc;
+    font-family: Arial, sans-serif;
+    margin-top: 10vh;
+    margin-left: 10vw;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #ffc107;
+    margin: 1rem 0;
+    padding: 0;
+}
+
+p {
+    color: #dcdcdc;
+    margin: 1rem 0;
+    padding: 0;
+}
+
+ul, ol {
+    list-style: none;
+    margin: 1rem 0;
+    padding: 0;
+}
+
+li {
+    margin: 0.5rem 0;
+    padding: 0;
+}
+
+a {
+    color: #ffc107;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+code {
+    background-color: #333;
+    border-radius: 5px;
+    color: #ffc107;
+    padding: 0.2rem 0.5rem;
+}
+
+@media (max-width: 768px) {
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1.1rem;
+    }
+
+    ul, ol {
+        font-size: 1.1rem;
+    }
+
+    li {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 1.3rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    ul, ol {
+        font-size: 1rem;
+    }
+
+    li {
+        font-size: 1rem;
+    }
+}
+    </style>
+<body>
+<h1>README  📝</h1>
+<p>Este repositorio contiene el código fuente de una aplicación Node.js utilizando NestJS como framework. La aplicación cuenta con diferentes módulos y funcionalidades, las cuales se describen a continuación.</p>
+<h2>Estructura del proyecto</h2>
+<p>El proyecto sigue la estructura de directorios recomendada por NestJS. A continuación, se presenta un resumen de los directorios más importantes:</p>
+<ul>
+<li>Estructura del proyecto:<ul>
+<li><code>auth</code>: Maneja los servicios de signin y signup.</li>
+<li><code>file-upload</code>: Se usa Cloudinary para la carga de archivos y generar un URL.</li>
+<li><code>users</code>: Controla la lógica de usuarios, protege rutas según la autenticación, y utiliza DTO.</li>
+<li><code>decorators</code>: Es un decorador personalizado donde se define el rol del usuario (admin o user).</li>
+<li><code>middlewares</code>: Se utiliza un middleware global para indicar la ruta, fecha y hora.</li>
+<li><code>products</code>: Controla la lógica de los productos y protege las rutas según la autenticación.</li>
+<li><code>orders</code>: Controla la lógica de las órdenes que realizan los usuarios, protege las rutas según la autenticación y utiliza DTO.</li>
+<li><code>categories</code>: Agrega categorías de productos.</li>
+</ul>
+</li>
+</ul>
+<h2>Módulos y funcionalidades</h2>
+<h3>Autenticación y autorización</h3>
+<p>El módulo <code>auth</code> se encarga de la autenticación y autorización de usuarios. Incluye los siguientes archivos:</p>
+<ul>
+<li><code>auth.controller.ts</code>: Controlador para manejar rutas relacionadas con la autenticación.</li>
+<li><code>auth.guard.ts</code>: Guardia de autenticación para proteger rutas.</li>
+<li><code>auth.service.ts</code>: Servicio para manejar la lógica de autenticación.</li>
+<li><code>roles.enum.ts</code>: Enumeración de roles de usuario.</li>
+</ul>
+<h3>Carga de archivos</h3>
+<p>El módulo <code>file-upload</code> permite cargar archivos en la aplicación. Incluye los siguientes archivos:</p>
+<ul>
+<li><code>file-upload.controller.ts</code>: Controlador para manejar rutas relacionadas con la carga de archivos.</li>
+<li><code>file-upload.module.ts</code>: Módulo que configura el servicio de carga de archivos.</li>
+<li><code>file-upload.service.ts</code>: Servicio para manejar la lógica de carga de archivos.</li>
+<li><code>file-upload.repository.ts</code>: Repositorio para almacenar información de los archivos cargados.</li>
+</ul>
+<h3>Usuarios</h3>
+<p>El módulo <code>users</code> gestiona los usuarios de la aplicación. Incluye los siguientes archivos:</p>
+<ul>
+<li><code>users.controller.ts</code>: Controlador para manejar rutas relacionadas con los usuarios.</li>
+<li><code>users.dto.ts</code>: Objetos de transferencia de datos (DTO) para definir las entradas y salidas de datos.</li>
+<li><code>users.module.ts</code>: Módulo que configura el servicio de usuarios.</li>
+<li><code>users.repository.ts</code>: Repositorio para almacenar y recuperar información de los usuarios.</li>
+<li><code>users.service.ts</code>: Servicio para manejar la lógica de los usuarios.</li>
+</ul>
+<h3>Productos</h3>
+<p>El módulo <code>products</code> gestiona los productos de la aplicación. Incluye los siguientes archivos:</p>
+<ul>
+<li><code>products.controller.ts</code>: Controlador para manejar rutas relacionadas con los productos.</li>
+<li><code>products.dto.ts</code>: Objetos de transferencia de datos (DTO) para definir las entradas y salidas de datos.</li>
+<li><code>products.module.ts</code>: Módulo que configura el servicio de productos.</li>
+<li><code>products.repository.ts</code>: Repositorio para almacenar y recuperar información de los productos.</li>
+<li><code>products.service.ts</code>: Servicio para manejar la lógica de los productos.</li>
+</ul>
+<h3>Ordenes</h3>
+<p>El módulo <code>orders</code> gestiona los ordenes de la aplicación. Incluye los siguientes archivos:</p>
+<ul>
+<li><code>orders.controller.ts</code>: Controlador para manejar rutas relacionadas con los Ordenes.</li>
+<li><code>orders.dto.ts</code>: Objetos de transferencia de datos (DTO) para definir las entradas y salidas de datos.</li>
+<li><code>orders.module.ts</code>: Módulo que configura el servicio de Ordenes.</li>
+<li><code>orders.repository.ts</code>: Repositorio para almacenar y recuperar información de los Ordenes.</li>
+<li><code>orders.service.ts</code>: Servicio para manejar la lógica de los Ordenes.</li>
+</ul>
+<h2>Endpoints</h2>
+<h4>Autenticación</h4>
+<ul>
+<li>POST <a href="https://ecomerce-public.vercel.app/auth/login">https://ecomerce-public.vercel.app/auth/login</a>: Realiza el inicio de sesión de un usuario.</li>
+<li>POST <a href="https://ecomerce-public.vercel.app/auth/register">https://ecomerce-public.vercel.app/auth/register</a>: Registra un nuevo usuario.</li>
+</ul>
+<h4>Usuarios</h4>
+<ul>
+<li>GET <a href="https://ecomerce-public.vercel.app/users">https://ecomerce-public.vercel.app/users</a>: Obtiene una lista de usuarios.</li>
+<li>GET <a href="https://ecomerce-public.vercel.app/users/:id">https://ecomerce-public.vercel.app/users/:id</a>: Obtiene un usuario específico por su ID.</li>
+<li>PUT <a href="https://ecomerce-public.vercel.app/users/:id">https://ecomerce-public.vercel.app/users/:id</a>: Actualiza un usuario específico por su ID.</li>
+<li>DELETE <a href="https://ecomerce-public.vercel.app/users/:id">https://ecomerce-public.vercel.app/users/:id</a>: Elimina un usuario específico por su ID.</li>
+</ul>
+<h4>Productos</h4>
+<ul>
+<li>GET <a href="https://ecomerce-public.vercel.app/products">https://ecomerce-public.vercel.app/products</a>: Obtiene una lista de productos.</li>
+<li>GET <a href="https://ecomerce-public.vercel.app/products/:id">https://ecomerce-public.vercel.app/products/:id</a>: Obtiene un producto específico por su ID.</li>
+<li>POST <a href="https://ecomerce-public.vercel.app/products">https://ecomerce-public.vercel.app/products</a>: Crea un nuevo producto.</li>
+<li>PUT <a href="https://ecomerce-public.vercel.app/products/:id">https://ecomerce-public.vercel.app/products/:id</a>: Actualiza un producto específico por su ID.</li>
+<li>DELETE <a href="https://ecomerce-public.vercel.app/products/:id">https://ecomerce-public.vercel.app/products/:id</a>: Elimina un producto específico por su ID.</li>
+</ul>
+<h4>Órdenes</h4>
+<ul>
+<li>GET <a href="https://ecomerce-public.vercel.app/orders">https://ecomerce-public.vercel.app/orders</a>: Obtiene una lista de órdenes.</li>
+<li>GET <a href="https://ecomerce-public.vercel.app/orders/:id">https://ecomerce-public.vercel.app/orders/:id</a>: Obtiene una orden específica por su ID.</li>
+<li>POST <a href="https://ecomerce-public.vercel.app/orders">https://ecomerce-public.vercel.app/orders</a>: Crea una nueva orden.</li>
+<li>PUT <a href="https://ecomerce-public.vercel.app/orders/:id">https://ecomerce-public.vercel.app/orders/:id</a>: Actualiza una orden específica por su ID.</li>
+<li>DELETE <a href="https://ecomerce-public.vercel.app/orders/:id">https://ecomerce-public.vercel.app/orders/:id</a>: Elimina una orden específica por su ID.</li>
+</ul>
+<h2>Configuración adicional</h2>
+<p>El proyecto también incluye archivos de configuración adicionales en el directorio <code>config</code> (typeorm y cloudinary) y archivos de entidades en el directorio <code>entities</code>. Además, se utilizan decoradores personalizados para extender las capacidades de NestJS.</p>
+<p>Para obtener más información sobre la configuración y el uso de estos archivos, consulte la <a href="https://docs.nestjs.com/">documentación oficial de NestJS</a>.</p>
+<h2>Información de Contacto</h2>
+<ul>
+<li><strong>Teléfono:</strong> +573057139607</li>
+<li><strong>Correo Electrónico:</strong> <a href="mailto:530nicolas@gmail.com">530nicolas@gmail.com</a></li>
+</ul>
+</body>
+</html>
+

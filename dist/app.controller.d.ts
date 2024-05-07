@@ -3,5 +3,5 @@ import { Response } from 'express';
 export declare class AppController {
     private readonly appService;
     constructor(appService: AppService);
-    getReadme(res: Response): Response<any, Record<string, any>>;
+    getReadme(res: Response): Promise<void>;
 }
